@@ -1,14 +1,15 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-// import { isSignIn } from './States/userSlice';
+import { useSelector } from 'react-redux';
+import { isSignIn } from './States/userSlice';
 
 const ProtectedRoute = ({
-  user,
   redirectPath = '/login',
   children,
 }) => {
-  if (!user) {
+  const userSignIn = useSelector(isSignIn);
+
+  if (!userSignIn) {
     return <Navigate to={redirectPath} replace />;
   }
 

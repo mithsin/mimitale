@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { Button } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { isSignIn } from 'States/userSlice';
+import { userLogin, userLogout } from 'States/cognitoSlice';
 
 import { FloatCard } from 'molecules';
-import { InputStandard, CardWrap } from 'atoms';
+import { InputStandard, CognitoButton } from 'atoms';
 import { isObjFalsy } from 'utils/functions';
 
 const Container = styled.div`
@@ -18,15 +20,15 @@ const Container = styled.div`
 `;
 
 const Login = () => {
-  // const userSignIn = useSelector(isSignIn);
-  // const dispatch = useDispatch();
-  const [inputErrorMessage, setInputErrorMessage] = useState('');
+  const userSignIn = useSelector(isSignIn);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [inputValue, setInputValue] = useState({
     userName: '',
     password: ''
   });
   const [isDisabled, setIsDisabled] = useState(true);
-
   useEffect(()=>{
     setIsDisabled(isObjFalsy(inputValue))
   },[inputValue])
@@ -41,32 +43,40 @@ const Login = () => {
   }
 
   const onLoginClicked = () => {
-    // (inputValue.userName && inputValue.password) && dispatch(userLogin({...inputValue}));
-    // (!inputValue.userName || !inputValue.password) 
-    //     ? setInputErrorMessage('FILL IN MISSING INPUT FIELD') 
-    //     : setInputErrorMessage('');
+    (inputValue.userName && inputValue.password) && dispatch(userLogin({...inputValue, navigate}));
+ 
+  };
+
+  const onLogoutClicked = () => {
+    dispatch(userLogout({navigate}))
   };
 
   return(
     <FloatCard title="LOGIN">
       <InputStandard 
         id="userName" 
-        label="user name" 
+        label="E-Mail" 
         variant="standard" 
         onChange={onInputChange}/>
       <InputStandard 
         id="password" 
-        label="password" 
+        label="Password" 
         type="password" 
         variant="standard" 
         onChange={onInputChange}/>
-      <Button 
+      <CognitoButton 
         variant="contained" 
         color="success"
         disabled={isDisabled}
         onClick={onLoginClicked}>
           SUBMIT
-      </Button>
+      </CognitoButton>
+      {userSignIn && <CognitoButton 
+        variant="contained" 
+        color="error"
+        onClick={onLogoutClicked}>
+          LOGOUT
+      </CognitoButton>}
       <span>Dont have a account? <Link to="/signup"> click here</Link></span>
     </FloatCard>
   )

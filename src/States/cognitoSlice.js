@@ -63,7 +63,7 @@ export const userLoginCheck = () => dispatch => {
 };
 
 // AWS User Login
-export const userLogin = ({userName, password, history}) => dispatch => {
+export const userLogin = ({userName, password, navigate}) => dispatch => {
     const authenticationData = {
         Username: userName,
         Password: password,
@@ -84,7 +84,7 @@ export const userLogin = ({userName, password, history}) => dispatch => {
             dispatch(setUerName(result.accessToken.payload.username));
             dispatch(setIsSignInState(true));
             dispatch(updateUserInitState(result.accessToken.payload.username, result.idToken.jwtToken))
-            history.push('/');
+            navigate('/');
          },
         onFailure: (err) => {
             alert(err.message || JSON.stringify(err));
@@ -93,7 +93,7 @@ export const userLogin = ({userName, password, history}) => dispatch => {
 };
 
 // AWS cognito Logout
-export const userLogout = ({history}) => dispatch => {
+export const userLogout = ({navigate}) => dispatch => {
     if(userPool.getCurrentUser()){
         dispatch(setAccessToken(''));
         dispatch(setIdToken(''));
@@ -107,7 +107,7 @@ export const userLogout = ({history}) => dispatch => {
             isSignIn: false,
         }));
         userPool.getCurrentUser().signOut();
-        history.push('/login');
+        navigate('/login');
     } else {
         console.log("user not available")
         alert("you are not login yet")
