@@ -10,7 +10,6 @@ import VerifyAccount from 'Pages/CognitoPages/VerifyAccount';
 const Dashboard = lazy(() => import('Pages/Dashboard'));
 
 const App = () => {
-  const userIsLogin = false
   return (
     <div className="App">
       <Routes>

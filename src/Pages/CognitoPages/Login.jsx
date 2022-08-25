@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { isSignIn } from 'States/userSlice';
 import { userLogin, userLogout } from 'States/cognitoSlice';
@@ -8,16 +7,6 @@ import { userLogin, userLogout } from 'States/cognitoSlice';
 import { FloatCard } from 'molecules';
 import { InputStandard, CognitoButton } from 'atoms';
 import { isObjFalsy } from 'utils/functions';
-
-const Container = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-  margin-top: 8rem;
-`;
 
 const Login = () => {
   const userSignIn = useSelector(isSignIn);
