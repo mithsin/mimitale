@@ -115,55 +115,43 @@ export const userLogout = ({navigate}) => dispatch => {
 };
 
 // AWS Cognito User Sign Up
-export const userSignUp = ({eMail, phoneNumber, password}) => dispatch => {
-    const dataEmail = {
-        Name: 'email',
-        Value: eMail,
-    };
-    const dataPhoneNumber = {
-        Name: 'phone_number',
-        Value: phoneNumber,
-    };
-    
-    const attributeList = [];
-    const attributeEmail = new CognitoUserAttribute(dataEmail);
-    const attributePhoneNumber = new CognitoUserAttribute(dataPhoneNumber);
+export const userSignUp = ({
+    eMail, 
+    phoneNumber, 
+    password
+},navigate) => {
 
-    attributeList.push(attributeEmail);
-    attributeList.push(attributePhoneNumber);
+    const attributeList = [
+        new CognitoUserAttribute({Name: 'email', Value: eMail}),
+        new CognitoUserAttribute({Name: 'phone_number', Value: phoneNumber}),
+    ];
 
-    userPool.signUp( eMail, password, attributeList, null, function(
-        err,
-        result
-    ) {
+    userPool.signUp( eMail, password, attributeList, null, (err, result) => {
         if (err) {
             alert(('cognitoSlice' + err.message) || JSON.stringify('cognitoSlice' + err));
             return;
+        } else {
+            var cognitoUser = result.user;
+            alert('user name is "' + cognitoUser.getUsername() + '" Please check your email for verification code');
+            navigate('/verifyaccount');
+
+             const params = {
+                subId: result.userSub,
+                eMail: eMail,
+                phoneNumber: phoneNumber
+            };
+            
+            axios.post(`${postURL}/user`, params)
+                .then(res=> {
+                    console.log('signUp-res------------>: ', res);
+                })
+                .catch(error => console.log(error))
         }
-        var cognitoUser = result.user;
-        const userData = JSON.stringify({eMail, phoneNumber, password, UserId: cognitoUser.getUsername()});
-        alert('user name is ' + cognitoUser.getUsername() + 'Please check your email for verification code');
-
-        dataPhoneNumber?.value && cognitoUser.confirmRegistration(dataPhoneNumber.value, true, function(err, result) {
-            if (err) {
-                alert(err.message || JSON.stringify(err));
-                return;
-            }
-            console.log('call result: ' + result);
-        });
-
-        axios.post(`${postURL}/user`, userData, {
-            headers: { 'Content-Type' : 'application/json' }
-          })
-          .then(res => {
-              console.log("login successful, should redirect to login page again")
-          })
-          .catch(err => console.log('err', err))
-    })
+    });
 };
 
 // AWS Cognito Verification 
-export const verificationAccount = (eMail, code, history) => dispatch => {
+export const verificationAccount = (eMail, code, navigate) => dispatch => {
 
     const userData = {
         Username: eMail,
@@ -177,7 +165,7 @@ export const verificationAccount = (eMail, code, history) => dispatch => {
             return;
         } else {
             alert('call result: ' + result);
-            history.push('/login');
+            navigate('/login');
             // trigger user data update for giving and recieving list card Id
         }
     })
