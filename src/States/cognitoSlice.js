@@ -7,7 +7,7 @@ import {
     AuthenticationDetails
 } from 'amazon-cognito-identity-js';
 // import AWS from 'aws-sdk';
-import { setIsSignInState, updateUserInitState, setUerName, setLoginInitialState } from './userSlice';
+import { setIsSignInState, updateUserInitState, setUserName, setUserId, setLoginInitialState } from './userSlice';
 // import { mockUser1 } from '../mockData';
 // AWS Setup
 const poolData = {
@@ -54,9 +54,10 @@ export const userLoginCheck = () => dispatch => {
         userPool.getCurrentUser().getSession((err, session) => {
             if(err){console.log('userPool.getCurrentUser() err---->', err)};
             const idToken = session?.getIdToken().getJwtToken();
+            console.log('userPool.getCurrentUser()--> ', userPool.getCurrentUser())
             dispatch(setIdToken(idToken))
             dispatch(updateUserInitState(userPool.getCurrentUser().username, idToken))
-            // dispatch(setUerName(userPool.getCurrentUser().username))
+            dispatch(setUserName(userPool.getCurrentUser().username))
             dispatch(setIsSignInState(true))
           });
     } 
@@ -80,9 +81,12 @@ export const userLogin = ({userName, password, navigate}) => dispatch => {
 
     cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: (result) => {
+            console.log('result-->: ', result)
+            console.log('result.accessToken.payload.sub->: ', result.accessToken.payload.sub)
             dispatch(setIdToken(result.idToken.jwtToken));
-            dispatch(setUerName(result.accessToken.payload.username));
+            dispatch(setUserName(result.accessToken.payload.username));
             dispatch(setIsSignInState(true));
+            dispatch(setUserId(result.accessToken.payload.sub));
             dispatch(updateUserInitState(result.accessToken.payload.username, result.idToken.jwtToken))
             navigate('/');
          },
@@ -98,7 +102,9 @@ export const userLogout = ({navigate}) => dispatch => {
         dispatch(setAccessToken(''));
         dispatch(setIdToken(''));
         dispatch(setCognitoUserInfo({}))
+        dispatch(setUserId(''));
         dispatch(setLoginInitialState({
+            UserId: '',
             userName: '',
             eMail: '',
             date: '',
@@ -115,55 +121,43 @@ export const userLogout = ({navigate}) => dispatch => {
 };
 
 // AWS Cognito User Sign Up
-export const userSignUp = ({eMail, phoneNumber, password}) => dispatch => {
-    const dataEmail = {
-        Name: 'email',
-        Value: eMail,
-    };
-    const dataPhoneNumber = {
-        Name: 'phone_number',
-        Value: phoneNumber,
-    };
-    
-    const attributeList = [];
-    const attributeEmail = new CognitoUserAttribute(dataEmail);
-    const attributePhoneNumber = new CognitoUserAttribute(dataPhoneNumber);
+export const userSignUp = ({
+    eMail, 
+    phoneNumber, 
+    password
+},navigate) => {
 
-    attributeList.push(attributeEmail);
-    attributeList.push(attributePhoneNumber);
+    const attributeList = [
+        new CognitoUserAttribute({Name: 'email', Value: eMail}),
+        new CognitoUserAttribute({Name: 'phone_number', Value: phoneNumber}),
+    ];
 
-    userPool.signUp( eMail, password, attributeList, null, function(
-        err,
-        result
-    ) {
+    userPool.signUp( eMail, password, attributeList, null, (err, result) => {
         if (err) {
             alert(('cognitoSlice' + err.message) || JSON.stringify('cognitoSlice' + err));
             return;
+        } else {
+            var cognitoUser = result.user;
+            alert('user name is "' + cognitoUser.getUsername() + '" Please check your email for verification code');
+            navigate('/verifyaccount');
+
+             const params = {
+                subId: result.userSub,
+                eMail: eMail,
+                phoneNumber: phoneNumber
+            };
+            
+            axios.post(`${postURL}/user`, params)
+                .then(res=> {
+                    console.log('signUp-res------------>: ', res);
+                })
+                .catch(error => console.log(error))
         }
-        var cognitoUser = result.user;
-        const userData = JSON.stringify({eMail, phoneNumber, password, UserId: cognitoUser.getUsername()});
-        alert('user name is ' + cognitoUser.getUsername() + 'Please check your email for verification code');
-
-        dataPhoneNumber?.value && cognitoUser.confirmRegistration(dataPhoneNumber.value, true, function(err, result) {
-            if (err) {
-                alert(err.message || JSON.stringify(err));
-                return;
-            }
-            console.log('call result: ' + result);
-        });
-
-        axios.post(`${postURL}/user`, userData, {
-            headers: { 'Content-Type' : 'application/json' }
-          })
-          .then(res => {
-              console.log("login successful, should redirect to login page again")
-          })
-          .catch(err => console.log('err', err))
-    })
+    });
 };
 
 // AWS Cognito Verification 
-export const verificationAccount = (eMail, code, history) => dispatch => {
+export const verificationAccount = (eMail, code, navigate) => dispatch => {
 
     const userData = {
         Username: eMail,
@@ -177,7 +171,7 @@ export const verificationAccount = (eMail, code, history) => dispatch => {
             return;
         } else {
             alert('call result: ' + result);
-            history.push('/login');
+            navigate('/login');
             // trigger user data update for giving and recieving list card Id
         }
     })

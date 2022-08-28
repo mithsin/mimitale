@@ -31,8 +31,8 @@ const SignUp = () => {
           eMail: inputValue?.eMail.toLowerCase(), 
           phoneNumber: inputValue?.phoneNumber ? `+1${inputValue.phoneNumber}` : '+10000000000',
           password: inputValue?.password};
-      dispatch(userSignUp({...inputConver}))
-      setTimeout(()=> navigate('/'),1500)
+      dispatch(userSignUp({...inputConver},navigate))
+      // setTimeout(()=> navigate('/'),1500)
     }
   };
 

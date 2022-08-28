@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { userLogout } from 'States/cognitoSlice';
 
 import { CognitoButton } from 'atoms';
+import { NewCardForm } from 'components/Forms';
 
 const Dashboard = () => {
     const dispatch = useDispatch();
@@ -11,6 +12,7 @@ const Dashboard = () => {
     const onLogoutClicked = () => {
         dispatch(userLogout({navigate}))
     }
+    const setOpenNewCardForm = true;
     return(
     <div>
         <CognitoButton 
@@ -20,6 +22,7 @@ const Dashboard = () => {
             LOGOUT
         </CognitoButton>
         Dashboard
+        <NewCardForm setOpenNewCardForm={setOpenNewCardForm} />
     </div>
 )};
 
