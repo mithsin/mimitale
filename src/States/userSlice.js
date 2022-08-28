@@ -5,6 +5,7 @@ import { updateCardData } from 'States/linkUserSlice';
 export const userSlice = createSlice({
     name: 'userState',
     initialState: {
+        UserId: '',
         userName: '',
         eMail: '',
         date: '',
@@ -16,6 +17,9 @@ export const userSlice = createSlice({
         isSignIn: false
     },
     reducers: {
+        setUserId: (state, action) => {
+            state.UserId = action.payload;
+        },
         setLoginInitialState: (state, action) => {
             return {...state, ...action.payload}
         },
@@ -25,7 +29,7 @@ export const userSlice = createSlice({
         setEnterCredentials: (state, action) => {
             state.noCredentials = action.payload;
         },
-        setUerName: (state, action) => {
+        setUserName: (state, action) => {
             state.userName = action.payload;
         },
         setReceivingList: (state, action) => {
@@ -66,10 +70,11 @@ export const userSlice = createSlice({
 });
  
 export const {
+    setUserId,
     setEnterCredentials, 
     setIsSignInState,
     setLoginInitialState,
-    setUerName,
+    setUserName,
     setReceivingList,
     setReceivingPendingList,
     setUpdateCard,
@@ -79,13 +84,13 @@ export const {
     setShoppingList,
 } = userSlice.actions;
 
-export const updateUserInitState = ( userName, idToken ) => dispatch => {
-    axios.get(`https://uwbx85xxs4.execute-api.us-east-1.amazonaws.com/api/user?UserId=${userName}`, {
+export const updateUserInitState = ( UserId, idToken ) => dispatch => {
+    axios.get(`https://uwbx85xxs4.execute-api.us-east-1.amazonaws.com/api/user?UserId=${UserId}`, {
         headers: { 'Authorization' : idToken }
     })
         .then(res => {
             if(res.data === null){
-                dispatch(setUerName(userName))
+                dispatch(setUserId(UserId))
             } else {
                 dispatch(setLoginInitialState({...res.data}));
             }
@@ -222,6 +227,7 @@ export const cardAdaptAction = (params) => dispatch => {
 
 export const userData = state => state.userState;
 export const userName = state => state.userState.userName;
+export const UserId = state => state.userState.UserId;
 export const eMail = state => state.userState.eMail;
 export const date = state => state.userState.date;
 export const noCredentials = state => state.userState.noCredentials;

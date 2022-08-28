@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { userName, givingList } from 'States/userSlice';
-import CloseBar from 'Components/Utils/CloseBar';
+import { UserId, givingList, createNewCard } from 'States/userSlice';
+import CloseBar from 'components/Utils/CloseBar';
 import { newCardDefaultShopAndTrade } from './defaultData';
-import { FullWidthOutterWrap, InnerFlexColumnWrap, FullWidthFormContainer, UploadImageWrap } from './styled';
+import { FullWidthOutterWrap, InnerFlexColumnWrap, FullWidthFormContainer } from './styled';
 import { FormFormat } from './FormFormat';
 
 const deafultFormat = {
@@ -19,7 +19,7 @@ const deafultFormat = {
 
 export const NewCardForm = ({setOpenNewCardForm}) => {
     const dispatch = useDispatch();
-    const giverId = useSelector(userName);
+    const giverId = useSelector(UserId);
     const givingListCurrent = useSelector(givingList);
     
     const onClickAddUser = (formInputs) => {
@@ -30,7 +30,7 @@ export const NewCardForm = ({setOpenNewCardForm}) => {
             ...formInputs
         }
         console.log('params--> ', params)
-        // dispatch(createNewCard(params));
+        dispatch(createNewCard(params));
         setOpenNewCardForm(false);
     };
 

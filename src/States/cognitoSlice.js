@@ -7,7 +7,7 @@ import {
     AuthenticationDetails
 } from 'amazon-cognito-identity-js';
 // import AWS from 'aws-sdk';
-import { setIsSignInState, updateUserInitState, setUerName, setLoginInitialState } from './userSlice';
+import { setIsSignInState, updateUserInitState, setUserName, setUserId, setLoginInitialState } from './userSlice';
 // import { mockUser1 } from '../mockData';
 // AWS Setup
 const poolData = {
@@ -54,9 +54,10 @@ export const userLoginCheck = () => dispatch => {
         userPool.getCurrentUser().getSession((err, session) => {
             if(err){console.log('userPool.getCurrentUser() err---->', err)};
             const idToken = session?.getIdToken().getJwtToken();
+            console.log('userPool.getCurrentUser()--> ', userPool.getCurrentUser())
             dispatch(setIdToken(idToken))
             dispatch(updateUserInitState(userPool.getCurrentUser().username, idToken))
-            // dispatch(setUerName(userPool.getCurrentUser().username))
+            dispatch(setUserName(userPool.getCurrentUser().username))
             dispatch(setIsSignInState(true))
           });
     } 
@@ -80,9 +81,12 @@ export const userLogin = ({userName, password, navigate}) => dispatch => {
 
     cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: (result) => {
+            console.log('result-->: ', result)
+            console.log('result.accessToken.payload.sub->: ', result.accessToken.payload.sub)
             dispatch(setIdToken(result.idToken.jwtToken));
-            dispatch(setUerName(result.accessToken.payload.username));
+            dispatch(setUserName(result.accessToken.payload.username));
             dispatch(setIsSignInState(true));
+            dispatch(setUserId(result.accessToken.payload.sub));
             dispatch(updateUserInitState(result.accessToken.payload.username, result.idToken.jwtToken))
             navigate('/');
          },
@@ -98,7 +102,9 @@ export const userLogout = ({navigate}) => dispatch => {
         dispatch(setAccessToken(''));
         dispatch(setIdToken(''));
         dispatch(setCognitoUserInfo({}))
+        dispatch(setUserId(''));
         dispatch(setLoginInitialState({
+            UserId: '',
             userName: '',
             eMail: '',
             date: '',

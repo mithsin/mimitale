@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { InputStandard, RadioButtonsGroup, BasicButtons } from 'atoms';
-import { ImageUpload } from 'Components/ImageUpload/ImageUpload';
+import { ImageUpload } from 'components/ImageUpload/ImageUpload';
 import { ButtonWrap, UploadImageWrap } from './styled';
 
 export const FormFormat = ({
