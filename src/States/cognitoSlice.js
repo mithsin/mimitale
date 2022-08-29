@@ -87,7 +87,7 @@ export const userLogin = ({userName, password, navigate}) => dispatch => {
             dispatch(setUserName(result.accessToken.payload.username));
             dispatch(setIsSignInState(true));
             dispatch(setUserId(result.accessToken.payload.sub));
-            dispatch(updateUserInitState(result.accessToken.payload.username, result.idToken.jwtToken))
+            dispatch(updateUserInitState(result.accessToken.payload.sub, result.idToken.jwtToken))
             navigate('/');
          },
         onFailure: (err) => {

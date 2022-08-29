@@ -6,6 +6,8 @@ import { userLogout } from 'States/cognitoSlice';
 import { CognitoButton } from 'atoms';
 import { NewCardForm } from 'Components/Forms';
 
+import { DashboardBodyWrap } from './styled';
+
 const Dashboard = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -14,7 +16,7 @@ const Dashboard = () => {
     }
     const setOpenNewCardForm = true;
     return(
-    <div>
+    <DashboardBodyWrap>
         <CognitoButton 
             variant="contained" 
             color="error"
@@ -23,7 +25,7 @@ const Dashboard = () => {
         </CognitoButton>
         Dashboard
         <NewCardForm setOpenNewCardForm={setOpenNewCardForm} />
-    </div>
+    </DashboardBodyWrap>
 )};
 
 export default Dashboard;
