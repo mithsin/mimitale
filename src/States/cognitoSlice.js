@@ -81,8 +81,6 @@ export const userLogin = ({userName, password, navigate}) => dispatch => {
 
     cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: (result) => {
-            console.log('result-->: ', result)
-            console.log('result.accessToken.payload.sub->: ', result.accessToken.payload.sub)
             dispatch(setIdToken(result.idToken.jwtToken));
             dispatch(setUserName(result.accessToken.payload.username));
             dispatch(setIsSignInState(true));

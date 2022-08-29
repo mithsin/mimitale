@@ -87,9 +87,6 @@ export const {
 const UserAPI = process.env.REACT_APP_API_GATEWAY_URL;
 
 export const updateUserInitState = ( UserId, idToken ) => dispatch => {
-    console.log('UserId-->: ', UserId)
-    console.log('idToken-->: ', idToken)
-
     axios.get(`${UserAPI}/user?UserId=${UserId}`, {
         headers: { 'Authorization' : idToken }
     })
