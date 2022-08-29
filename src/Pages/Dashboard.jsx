@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { userLogout } from 'States/cognitoSlice';
 
 import { CognitoButton } from 'atoms';
-import { NewCardForm } from 'components/Forms';
+import { NewCardForm } from 'Components/Forms';
 
 const Dashboard = () => {
     const dispatch = useDispatch();

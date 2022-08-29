@@ -84,8 +84,10 @@ export const {
     setShoppingList,
 } = userSlice.actions;
 
+const UserAPI = process.env.REACT_APP_API_GATEWAY_URL;
+
 export const updateUserInitState = ( UserId, idToken ) => dispatch => {
-    axios.get(`https://uwbx85xxs4.execute-api.us-east-1.amazonaws.com/api/user?UserId=${UserId}`, {
+    axios.get(`${UserAPI}/user?UserId=${UserId}`, {
         headers: { 'Authorization' : idToken }
     })
         .then(res => {
@@ -107,7 +109,7 @@ export const updateUserShoppingList = ( params ) => dispatch => {
         data: {},
     };
     // console.log('params==updateUserShoppingList==============>: ', params)
-    axios.put(`https://uwbx85xxs4.execute-api.us-east-1.amazonaws.com/api/user/shopping-list`, params, config)
+    axios.put(`${UserAPI}/user/shopping-list`, params, config)
         .then(res => {
             console.log('updateCardItemsList-res->: ', res.data)
             if(res.data.status === 200){
@@ -127,7 +129,7 @@ export const updateCardInfo = (params) => dispatch => {
         data: {},
     };
     // console.log('params==updateCardInfo==============>: ', params)
-    axios.put(`https://uwbx85xxs4.execute-api.us-east-1.amazonaws.com/api/card`, params, config)
+    axios.put(`${UserAPI}/card`, params, config)
         .then(res => {
             if(res.data.status === 200){
                 dispatch(setUpdateCard(params));
@@ -145,7 +147,7 @@ export const updateCardItemsList = (params) => dispatch => {
         data: {},
     };
     // console.log('params==updateCardInfo==============>: ', params)
-    axios.put(`https://uwbx85xxs4.execute-api.us-east-1.amazonaws.com/api/card/items-list`, params, config)
+    axios.put(`${UserAPI}/card/items-list`, params, config)
         .then(res => {
             console.log('updateCardItemsList-res->: ', res.data)
             if(res.data.status === 200){
@@ -164,7 +166,7 @@ export const createNewCard = (params) => dispatch => {
         },
         data: {},
     };
-    axios.post(`https://uwbx85xxs4.execute-api.us-east-1.amazonaws.com/api/card`, params, config)
+    axios.post(`${UserAPI}/card`, params, config)
         .then(res => {
             if(res.data.status === 200){
                 dispatch(setUpdateNewCard(res.data.newCardData))
@@ -185,7 +187,7 @@ export const DeleteCard = (params) => (dispatch, getState) => {
         data: {...newParams},
     };
     
-    axios.delete(`https://uwbx85xxs4.execute-api.us-east-1.amazonaws.com/api/card`, config)
+    axios.delete(`${UserAPI}/card`, config)
         .then(res => {
             dispatch(setDeleteCardUpdate(giverFilterFullList))
         })
@@ -193,7 +195,7 @@ export const DeleteCard = (params) => (dispatch, getState) => {
 }
 
 export const linkUpdateCardUser = (params) => dispatch => {
-    axios.put(`https://uwbx85xxs4.execute-api.us-east-1.amazonaws.com/api/card/usercardlink`, params)
+    axios.put(`${UserAPI}/card/usercardlink`, params)
         .then(res => {
             if(res.data.status === 200){
                 dispatch(setUpdateCard(params));
@@ -212,7 +214,7 @@ export const cardAdaptAction = (params) => dispatch => {
         receivingPendingList: params.receivingPendingList,
         cardSetting: params.cardSetting
     }
-    axios.put(`https://uwbx85xxs4.execute-api.us-east-1.amazonaws.com/api/card-adapt`, newParams)
+    axios.put(`${UserAPI}/card-adapt`, newParams)
         .then(res => {
             if(res.data.status === 200){
                 if(pendingCard){

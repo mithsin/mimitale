@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { UserId, givingList, createNewCard } from 'States/userSlice';
-import CloseBar from 'components/Utils/CloseBar';
+import CloseBar from 'Components/Utils/CloseBar';
 import { newCardDefaultShopAndTrade } from './defaultData';
 import { FullWidthOutterWrap, InnerFlexColumnWrap, FullWidthFormContainer } from './styled';
 import { FormFormat } from './FormFormat';

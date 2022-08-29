@@ -31,8 +31,10 @@ export const {
     setCardState
 } = linkUserSlice.actions;
 
+const UserAPI = process.env.REACT_APP_API_GATEWAY_URL;
+
 export const getCardData = ( cardlink ) => dispatch => {
-        axios.get(`https://uwbx85xxs4.execute-api.us-east-1.amazonaws.com/api/card/${cardlink}`)
+        axios.get(`${UserAPI}/card/${cardlink}`)
         .then(res => 
             dispatch(setCardState({...res.data}))
         )
