@@ -188,7 +188,7 @@ export const DeleteCard = (params) => (dispatch, getState) => {
     };
     
     axios.delete(`${UserAPI}/card`, config)
-        .then(res => {
+        .then(() => {
             dispatch(setDeleteCardUpdate(giverFilterFullList))
         })
         .catch(err => console.log('api-updatecard-err: ', err))
@@ -219,7 +219,7 @@ export const cardAdaptAction = (params) => dispatch => {
             if(res.data.status === 200){
                 if(pendingCard){
                     dispatch(setReceivingList(pendingCard))
-                };
+                }
                 dispatch(setReceivingPendingList(newParams.receivingPendingList));
             }
         })
