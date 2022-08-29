@@ -26,7 +26,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "npx eslint src --fix",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -48,7 +48,5 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.23.0",
-    "eslint-plugin-react": "^7.31.1"
   }
 }

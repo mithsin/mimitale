@@ -1,30 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userLogout } from 'States/cognitoSlice';
 
-import { CognitoButton } from 'atoms';
-import { NewCardForm } from 'Components/Forms';
+import { useSelector } from 'react-redux';
+import { userData } from 'States/userSlice';
 
-import { DashboardBodyWrap } from './styled';
+import { NewCardForm } from 'Components/Forms';
+import { Card } from 'Components/Card';
+
+import { DashboardBodyWrap, ListSection, ListWrap } from './styled';
 
 const Dashboard = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const onLogoutClicked = () => {
-        dispatch(userLogout({navigate}))
-    }
-    const setOpenNewCardForm = true;
+    const userDataState = useSelector(userData);
+    const [openNewCardForm, setOpenNewCardForm] = useState(false)
+
+    useEffect(() => {
+        userDataState?.givingList.length === 0 
+            ? setOpenNewCardForm(true)
+            : setOpenNewCardForm(false);
+    },[userDataState?.givingList])
+
     return(
     <DashboardBodyWrap>
-        <CognitoButton 
-            variant="contained" 
-            color="error"
-            onClick={onLogoutClicked}>
-            LOGOUT
-        </CognitoButton>
-        Dashboard
-        <NewCardForm setOpenNewCardForm={setOpenNewCardForm} />
+        DASHBOARD PAGE
+        <ListSection>
+            <span>GIVING LIST</span>
+            <ListWrap className='cardListCtn'>
+                { userDataState && userDataState.givingList &&
+                    userDataState.givingList.map((data, index) => 
+                        <Card key={index} cardData={data} userTypeGiver={true}/>
+                    )
+                }
+            </ListWrap>
+        </ListSection>
+
+        {openNewCardForm && <NewCardForm setOpenNewCardForm={setOpenNewCardForm} />}
     </DashboardBodyWrap>
 )};
 
