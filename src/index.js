@@ -1,23 +1,26 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import store from 'Store/store';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import App from './App';
 import './index.css';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { persistor, store } from 'Store/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
-  <React.StrictMode>
+  <React.Suspense fallback={<div>...LOADING</div>}>
     <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <App />
+        </Router>
+      </PersistGate>
     </Provider>
-  </React.StrictMode>
+  </React.Suspense>
 );
 
 // If you want to start measuring performance in your app, pass a function

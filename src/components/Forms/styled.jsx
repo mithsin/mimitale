@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 export const FullWidthOutterWrap = styled.div`
     padding: 1rem;
@@ -7,6 +7,7 @@ export const FullWidthOutterWrap = styled.div`
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    border: 1px dotted black;
     min-width: 340px;
     max-width: 1280px;
 `;

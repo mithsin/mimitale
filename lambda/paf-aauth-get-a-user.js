@@ -29,9 +29,12 @@ exports.handler = (event, context, callback) => {
                 const giving = (data.Item.givingList ) ? fullCardData.filter(list => (data.Item.givingList).includes(list.CardId)) : [];
                 const receiving = (data.Item.receivingList) ? fullCardData.filter(list => (data.Item.receivingList).includes(list.CardId)) : [];
                 const receivingPending = (data.Item.receivingPendingList) ? fullCardData.filter(list => (data.Item.receivingPendingList).includes(list.CardId)) : [];
-                
+               
+                console.log('data.Item: ', data.Item)
+                console.log('fulldata: ', fulldata)
                 
                 callback(null, {
+                    UserId: data.Item.UserId,
                     userName: data.Item.userName, 
                     givingList: giving, 
                     receivingList: receiving, 

@@ -52,7 +52,7 @@ export const userLoginCheck = () => dispatch => {
     }
     if (userPool.getCurrentUser()) {
         userPool.getCurrentUser().getSession((err, session) => {
-            if(err){console.log('userPool.getCurrentUser() err---->', err)};
+            if(err){console.log('userPool.getCurrentUser() err---->', err)}
             const idToken = session?.getIdToken().getJwtToken();
             console.log('userPool.getCurrentUser()--> ', userPool.getCurrentUser())
             dispatch(setIdToken(idToken))
@@ -81,13 +81,11 @@ export const userLogin = ({userName, password, navigate}) => dispatch => {
 
     cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: (result) => {
-            console.log('result-->: ', result)
-            console.log('result.accessToken.payload.sub->: ', result.accessToken.payload.sub)
             dispatch(setIdToken(result.idToken.jwtToken));
             dispatch(setUserName(result.accessToken.payload.username));
             dispatch(setIsSignInState(true));
             dispatch(setUserId(result.accessToken.payload.sub));
-            dispatch(updateUserInitState(result.accessToken.payload.username, result.idToken.jwtToken))
+            dispatch(updateUserInitState(result.accessToken.payload.sub, result.idToken.jwtToken))
             navigate('/');
          },
         onFailure: (err) => {
@@ -157,7 +155,7 @@ export const userSignUp = ({
 };
 
 // AWS Cognito Verification 
-export const verificationAccount = (eMail, code, navigate) => dispatch => {
+export const verificationAccount = (eMail, code, navigate) => {
 
     const userData = {
         Username: eMail,
@@ -177,7 +175,7 @@ export const verificationAccount = (eMail, code, navigate) => dispatch => {
     })
 };
 
-export const resendSMSVerifyCode = (eMail) => dispatch => {
+export const resendSMSVerifyCode = (eMail) => {
     const userData = {
         Username: eMail,
         Pool: userPool,
@@ -195,7 +193,7 @@ export const resendSMSVerifyCode = (eMail) => dispatch => {
     });
 };
 
-export const setUpNewPassword = (eMail, code, newPassword) => dispatch => {
+export const setUpNewPassword = (eMail, code, newPassword) => {
     const userData = {
         Username: eMail,
         Pool: userPool,
@@ -207,7 +205,7 @@ export const setUpNewPassword = (eMail, code, newPassword) => dispatch => {
             alert('password successfully changed')
         },
         onFailure(err) {
-            console.log('Password not confirmed!');
+            console.log('Password not confirmed!', err);
             alert('change password failed')
         },
     });
