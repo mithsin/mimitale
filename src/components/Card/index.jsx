@@ -1,6 +1,6 @@
 import React from 'react';
 import { CardOutterWrap } from './styled';
-import { ProfileImageSection, StarsSection } from './CardSections';
+import { ProfileImageSection, StarsSection, OptionsSwipe } from './CardSections';
 
 
 export const Card = ({cardData}) => {
@@ -9,6 +9,7 @@ export const Card = ({cardData}) => {
         <CardOutterWrap>
             <ProfileImageSection cardData={cardData}/>
             <StarsSection cardData={cardData}/>
+            <OptionsSwipe />
         </CardOutterWrap>
     );
 }

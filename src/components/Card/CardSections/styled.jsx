@@ -26,6 +26,7 @@ export const NameBlock = styled.span`
     font-size: 2rem;
     display: flex;
     align-items: flex-end;
+    font-family: cursive;
 `;
 export const StarsBlock = styled.span`
     flex: auto;
@@ -43,12 +44,35 @@ export const StarPointsType = styled.div`
     top: 0;
 `;
 
-export const FontAwesomeIconAvailable = styled(FontAwesomeIcon)`
-    color: rgb(23, 255, 2);
+export const FontAwesomeIconCont = styled(FontAwesomeIcon)`
+    ${props => {
+        if (props.type === 'available') {
+            return `color: rgb(23, 255, 2);`
+        }
+        if (props.type === 'reward') {
+            return `color: rgb(231, 231, 82);`
+        }
+        if (props.type === 'traded') {
+            return `color: rgb(204, 0, 0);`
+        }
+    }}
 `;
-export const FontAwesomeIconReward = styled(FontAwesomeIcon)`
-    color: rgb(231, 231, 82);
+
+export const SlideWrapper = styled.div`
+    padding: 1rem 0;
+    border-bottom: 1px solid;
 `;
-export const FontAwesomeIconTraded = styled(FontAwesomeIcon)`
-    color: rgb(204, 0, 0);
+
+export const SlideWrapContWrap = styled.div`
+    max-width: 100px;
+    background-color: #ebebeb;
+    padding: .5rem;
+    display: flex;
+    flex-direction: column;
 `;
+
+export const wrapP = styled.p`
+    color: 'pink',
+    margin: 0,
+    padding: 0,
+`

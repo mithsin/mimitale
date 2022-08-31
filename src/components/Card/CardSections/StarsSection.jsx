@@ -4,18 +4,14 @@ import {
     StarsSectionWrap,
     NameBlock,
     StarsBlock,
-    FontAwesomeIconAvailable,
-    FontAwesomeIconReward,
-    FontAwesomeIconTraded,
+    FontAwesomeIconCont,
     StarPointsWrap,
     StarPointsType,
 } from './styled';
 
 const StarsContainer = ({type, size="2x", StarPoints}) => (
     <StarsBlock>
-        { type === 'available' && <FontAwesomeIconAvailable icon={faStar} size={size}/>}
-        { type === 'reward' && <FontAwesomeIconReward icon={faStar} size={size}/>}
-        { type === 'traded' && <FontAwesomeIconTraded icon={faStar} size={size}/>}
+        <FontAwesomeIconCont beat type={type} icon={faStar} size={size}/>
         {type && <StarPointsType className="starLabel">{type}</StarPointsType>}
         <StarPointsWrap>{StarPoints}</StarPointsWrap>
     </StarsBlock>
