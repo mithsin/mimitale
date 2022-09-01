@@ -1,6 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
-
+import { SwiperSlideWrap } from './styled'; 
 // Import Swiper styles
 import 'swiper/css';
 import { Pagination } from "swiper";
@@ -26,7 +26,7 @@ export const SwipComponent = ({
     >
       {
         slideList.map(slide => 
-          <SwiperSlide>
+          <SwiperSlide style={{width: '100px'}}>
             <WrapCont slide={slide} />
           </SwiperSlide>    
         )

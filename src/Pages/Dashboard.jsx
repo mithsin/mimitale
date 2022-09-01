@@ -27,8 +27,8 @@ const Dashboard = () => {
         <ListSection>
             <span>GIVING LIST</span>
             <ListWrap className='cardListCtn'>
-                { userDataState && userDataState.givingList &&
-                    userDataState.givingList.map((data, index) => 
+                {   
+                    userDataState?.givingList?.map((data, index) => 
                         <Card key={index} cardData={data} userTypeGiver={true}/>
                     )
                 }

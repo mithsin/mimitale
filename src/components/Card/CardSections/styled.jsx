@@ -8,11 +8,21 @@ export const ImageContainer = styled.div`
     margin-left: 0px;
     border-bottom: 1px solid black;
     padding: 1rem;
+    position: relative;
     img {
         height: 200px;
         border-radius: 50%;
     }
 `;
+
+export const ImageContWrap = styled.span`
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2rem;
+    z-index: 9999;
+    cursor: pointer;
+`
 
 export const StarsSectionWrap = styled.div`
     display: flex;
@@ -57,6 +67,26 @@ export const FontAwesomeIconCont = styled(FontAwesomeIcon)`
         }
     }}
 `;
+export const IconAbsoulteTopRight = styled(FontAwesomeIcon)`
+    position: absolute;
+    z-index: 9999;
+    cursor: pointer;
+    ${props => `
+        top: ${props.top || 0};
+        right: ${props.right || 0};
+    `}
+
+`;
+export const PointsBottomRight = styled.div`
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #e6e6e6;
+    border-radius: 50%;
+    padding: 3px;
+    font-weight: 700;
+    ${props => `color: ${props.color};`}
+`;
 
 export const SlideWrapper = styled.div`
     padding: 1rem 0;
@@ -65,14 +95,77 @@ export const SlideWrapper = styled.div`
 
 export const SlideWrapContWrap = styled.div`
     max-width: 100px;
-    background-color: #ebebeb;
+    wdith: 100px;
     padding: .5rem;
     display: flex;
     flex-direction: column;
+    background-color: #7b7b7b21;
+    border-radius: 15%;
+    cursor: pointer;
+    &:hover {
+        background-color: #00000021;
+    }
 `;
 
-export const wrapP = styled.p`
-    color: 'pink',
-    margin: 0,
-    padding: 0,
+export const WrapText = styled.p`
+    color: #000;
+    margin: 0;
+    padding: 0;
+    text-transform: capitalize;
 `
+
+export const SelectedSectionWrapper = styled.div`
+    padding: 1rem 0;
+    border-bottom: 1px solid;
+    position: relative;
+`;
+
+export const SectionGridWrap = styled.div`
+    display: grid;
+    gap: .5rem;
+    grid-template-columns: repeat( auto-fit, minmax(100px, 1fr) );
+`;
+
+export const ItemBlockWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    padding: 10px;
+    background-color: #fff;
+    min-height: 200px;
+    .starsWrapper {
+        position: absolute;
+        top: 50px;
+        right: 16px;
+        font-size: 50px;
+        z-index: 999999;
+    }
+    .textWrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background-color: rgba(255,255,255,.5);
+        text-align: center;
+        padding: 10px;
+        .textTitle {
+            font-size: .825rem;
+            font-weight: 700;
+        }
+        .textDescription {
+            font-size: .7rem;
+            margin-top: 10px;
+        }
+    }
+`;
+
+export const BackgroundImage = styled.div`
+    width: 100%;
+    height: 50%;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    ${props => `background-image: url(${props.image})`}
+`;

@@ -1,7 +1,14 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { ImageContainer } from './styled';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+    faUser, 
+    faEllipsisVertical 
+} from '@fortawesome/free-solid-svg-icons';
+
+import {
+    ImageContWrap,
+    ImageContainer, 
+} from './styled';
 
 export const ProfileImageSection = ({cardData}) => {
     const { profileImage, receiverGender, nickName } = cardData;
@@ -9,6 +16,9 @@ export const ProfileImageSection = ({cardData}) => {
     const boyAnimateImg = "https://i.pinimg.com/736x/20/35/76/203576cfc2b68dc061360f47602ba06d.jpg";
     return (
         <ImageContainer>
+            <ImageContWrap>
+                <FontAwesomeIcon icon={faEllipsisVertical}/>
+            </ImageContWrap>
             {
                 (profileImage && <img src={profileImage} alt={nickName} />) ||
                 ((receiverGender === "F") && <img src={girlAnimateImg} alt="Girl-animate" />) ||
