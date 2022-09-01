@@ -107,6 +107,10 @@ export const SlideWrapContWrap = styled.div`
     }
 `;
 
+export const UpperH3 = styled.h3`
+    text-transform: uppercase;
+`;
+
 export const WrapText = styled.p`
     color: #000;
     margin: 0;

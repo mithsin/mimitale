@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
     SelectedSectionWrapper,
     SectionGridWrap,
-    IconAbsoulteTopRight
+    IconAbsoulteTopRight,
+    UpperH3
 } from './styled';
 
 import { mockQuest } from './mockQuestData';
@@ -11,19 +12,35 @@ import {
     faMaximize
 } from '@fortawesome/free-solid-svg-icons';
 
-export const SelectedSectionLayout = ({cardData}) => {
-    
+import { updateCardItemsList } from 'States/userSlice';
+
+export const SelectedSectionLayout = (props) => {
+    const [selectList, setSelectList] = useState([])
+    const {
+        selectedSection,
+        cardData
+    } = props;
+    useEffect(()=>{
+        setSelectList(cardData[selectedSection])
+    },[selectedSection])
+
+    console.log('selectedSection-->: ', selectedSection)
+    console.log('SelectedSectionLayout-cardData-->: ', cardData)
+    console.log('selectList ', selectList)
+
     return (
         <SelectedSectionWrapper>
             <IconAbsoulteTopRight top="1rem" right="1rem" icon={faMaximize} />
-            <h3>Selected Title</h3>
+            <UpperH3>{selectedSection}</UpperH3>
             <SectionGridWrap>
                 {
-                    mockQuest.map(item => {
-                        return(
-                            <ItemBlock itemBlockData={item}/>
-                        )
-                    })
+                    selectList
+                        ? selectList.map(item => {
+                                return(
+                                    <ItemBlock itemBlockData={item}/>
+                                )
+                            })
+                        : <p>{selectedSection}</p>
                 }
             </SectionGridWrap>
         </SelectedSectionWrapper>

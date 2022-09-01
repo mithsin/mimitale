@@ -41,12 +41,13 @@ export default function ButtonAppBar() {
     <div className="headerBlock">
       <AppBar position="static" style={{backgroundColor: "#ffffff00", boxShadow: "0 0 0 0", padding: "0px"}}>
         <Toolbar style={{display: "flex", justifyContent: "space-between", padding: "8px"}}>
-        <Link to="/">
-            <img 
-                className="logoClass"
-                src="https://res.cloudinary.com/paf1david/image/upload/v1599395992/pafpay/oljxozj8fby4beaefipe.png" 
-                alt="mimitale"/>
-        </Link>
+          <Link to="/">
+              <img 
+                  style={{width: '100%'}}
+                  className="logoClass"
+                  src="https://res.cloudinary.com/paf1david/image/upload/v1599395992/pafpay/oljxozj8fby4beaefipe.png" 
+                  alt="mimitale"/>
+          </Link>
           <Avatar style={{backgroundColor: "#6bbbfd"}} onClick={()=>setOpenProfileMenu(!openProfileMenu)}>{userDataState?.userName.substring(0,1).toUpperCase()}</Avatar>
         </Toolbar>
       </AppBar>

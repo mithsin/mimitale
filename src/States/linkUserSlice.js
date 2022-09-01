@@ -18,6 +18,7 @@ export const linkUserSlice = createSlice({
         requestItem: [],
         shopItemList: [],
         questItemList: [],
+        dailyQuestItemList: [],
         cardSetting: {}
     },
     reducers: {
