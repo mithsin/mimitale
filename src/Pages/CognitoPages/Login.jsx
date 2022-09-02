@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isSignIn } from 'States/userSlice';
 import { userLogin, userLogout } from 'States/cognitoSlice';
 
-import { FloatCard } from 'molecules';
-import { InputStandard, CognitoButton } from 'atoms';
+import { FloatCard } from 'Molecules';
+import { InputStandard, CognitoButton } from 'Atoms';
 import { isObjFalsy } from 'utils/functions';
 
 const Login = () => {

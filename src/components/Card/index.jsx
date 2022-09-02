@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CardOutterWrap } from './styled';
 import { ProfileImageSection, StarsSection, OptionsSwipe, SelectedSectionLayout } from './CardSections';
 
-import { staticOptionList } from './CardSections/utilities';
+import { staticOptionList } from './Utilities/support';
 
 
 export const Card = ({cardData}) => {

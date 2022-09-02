@@ -36,8 +36,15 @@ export const staticOptionList = [{
             icon={faListAlt} 
             color="#704cb6"                
             size="2x"/>,
-    option: 'pending',
+    option: 'trade pending',
     dataListName: 'tradePending'
+},{
+    icon: <FontAwesomeIconCont 
+            icon={faListAlt} 
+            color="#c3b800"                
+            size="2x"/>,
+    option: 'complete pending',
+    dataListName: 'completePending'
 },{
     icon: <FontAwesomeIconCont 
             icon={faUniversity} 

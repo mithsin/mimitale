@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { InputStandard, RadioButtonsGroup, BasicButtons } from 'atoms';
+import { InputStandard, RadioButtonsGroup, BasicButtons } from 'Atoms';
 import { ImageUpload } from 'Components/ImageUpload/ImageUpload';
-import { ButtonWrap, UploadImageWrap } from './styled';
+import { ButtonWrap, UploadImageWrap, ImageWrap } from './styled';
 
 export const FormFormat = ({
     defaultFormat,
@@ -12,7 +12,7 @@ export const FormFormat = ({
 
     const [formInputs, setFormInputs] = useState(defaultFormat ? defaultFormat : {});
     const [useInputSetting, setUseInputSetting] = useState(inputSettings)
-    const [imageURL, setImageURL] = useState('');
+    const [imageURL, setImageURL] = useState(defaultFormat.image || '');
     const [inputError, setInputError] = useState()
     const clearInput = Object.assign(inputSettings);
     useEffect(()=>{
@@ -53,10 +53,16 @@ export const FormFormat = ({
     return (
         <div>
             {   isUploadImageAvailable &&
-                    <UploadImageWrap>
+                    <div>
                         Upload Profile Image
-                        <ImageUpload setImageURL={setImageURL}/>    
-                    </UploadImageWrap>
+                        <UploadImageWrap>
+                            <ImageUpload setImageURL={setImageURL}/>
+                            <ImageWrap>
+                                <img 
+                                    src={imageURL} alt="upload-image-preview" />
+                            </ImageWrap>
+                        </UploadImageWrap>
+                    </div>
             }
             {
                 useInputSetting.map((inputSetting)=> {

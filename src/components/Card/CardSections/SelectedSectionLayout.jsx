@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { 
     SelectedSectionWrapper,
-    SectionGridWrap,
     IconAbsoulteTopRight,
-    UpperH3
+    UpperH3,
+    SectionBodyWrap
 } from './styled';
 
-import { mockQuest } from './mockQuestData';
-import ItemBlock from './ItemBlock';
 import { 
     faMaximize
 } from '@fortawesome/free-solid-svg-icons';
+import { ShowLayoutType } from '../Utilities/ShowLayoutType';
 
 import { updateCardItemsList } from 'States/userSlice';
 
@@ -24,25 +23,18 @@ export const SelectedSectionLayout = (props) => {
         setSelectList(cardData[selectedSection])
     },[selectedSection])
 
-    console.log('selectedSection-->: ', selectedSection)
-    console.log('SelectedSectionLayout-cardData-->: ', cardData)
-    console.log('selectList ', selectList)
-
+    console.log('cardData-->: ', cardData)
     return (
         <SelectedSectionWrapper>
             <IconAbsoulteTopRight top="1rem" right="1rem" icon={faMaximize} />
             <UpperH3>{selectedSection}</UpperH3>
-            <SectionGridWrap>
-                {
-                    selectList
-                        ? selectList.map(item => {
-                                return(
-                                    <ItemBlock itemBlockData={item}/>
-                                )
-                            })
-                        : <p>{selectedSection}</p>
-                }
-            </SectionGridWrap>
+            <SectionBodyWrap>
+                <ShowLayoutType 
+                    type={selectedSection}
+                    list={selectList}
+                    cardData={cardData}
+                />
+            </SectionBodyWrap>
         </SelectedSectionWrapper>
     );
 }

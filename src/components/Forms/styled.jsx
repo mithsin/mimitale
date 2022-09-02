@@ -27,7 +27,17 @@ export const FullWidthFormContainer = styled.div`
 `;
 
 export const UploadImageWrap = styled.div`
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 1rem;
+`;
+
+export const ImageWrap = styled.div`
+    height: 100%;
+    padding: 3rem;
+    img {
+        width: 100%;
+    }
 `;
 
 //FormFormat

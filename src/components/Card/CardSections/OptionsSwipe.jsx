@@ -1,6 +1,6 @@
 import React from 'react';
 import SwipComponent from 'Components/Utils/SwipComponent';
-import { staticOptionList } from './utilities';
+import { staticOptionList } from '../Utilities/support';
 import { 
     SlideWrapper,
     SlideWrapContWrap,
