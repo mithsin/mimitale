@@ -41,7 +41,7 @@ const SignUp = () => {
       <InputStandard 
         required
         id="eMail" 
-        label="user name" 
+        label="E-Mail" 
         variant="standard" 
         onChange={onInputChange}/>
       <InputStandard 
@@ -52,7 +52,7 @@ const SignUp = () => {
       <InputStandard
         required 
         id="password" 
-        label="password" 
+        label="Password" 
         type="password" 
         variant="standard" 
         onChange={onInputChange}/>
