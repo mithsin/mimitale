@@ -6,7 +6,7 @@ export const ItemBlockWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     position: relative;
     padding: 10px;
     background-color: #fff;

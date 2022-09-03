@@ -7,7 +7,7 @@ import { Models } from 'Molecules/Models';
 
 
 
-export const EditItemFrom = ({ 
+export const AddNewItemForm = ({ 
     setIsModelOpen, 
     type, 
     itemData, 
@@ -56,7 +56,7 @@ export const EditItemFrom = ({
     ];
     return (
         <Models setIsModelOpen={setIsModelOpen}>
-            <h2>Edit Item</h2>
+            <h2>Add New Item</h2>
             <FullWidthFormContainer>
                 <FormPreSet
                     isUploadImageAvailable={true}
@@ -69,4 +69,4 @@ export const EditItemFrom = ({
     )
 }
 
-export default EditItemFrom;
+export default AddNewItemForm;

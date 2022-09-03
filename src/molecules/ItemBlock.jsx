@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { BasicButtons } from 'Atoms';
-import { v4 as uuidv4 } from 'uuid';
 import {
     ItemBlockWrapper, 
     BackgroundImage,
