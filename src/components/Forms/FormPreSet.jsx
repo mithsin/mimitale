@@ -1,10 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { InputStandard, RadioButtonsGroup, BasicButtons } from 'Atoms';
 import { ImageUpload } from 'Components/ImageUpload/ImageUpload';
+import Switch from '@mui/material/Switch';
 import { ButtonWrap, UploadImageWrap, ImageWrap } from './styled';
 
-export const FormFormat = ({
+export const FormPreSet = ({
     defaultFormat,
     inputSettings,
     isUploadImageAvailable=false, 
@@ -14,20 +14,21 @@ export const FormFormat = ({
     const [formInputs, setFormInputs] = useState(defaultFormat ? defaultFormat : {});
     const [useInputSetting, setUseInputSetting] = useState(inputSettings)
     const [imageURL, setImageURL] = useState(defaultFormat.image || '');
+    const [isImageURLDrop, setIsImageURLDrop] = useState(true);
     const [inputError, setInputError] = useState()
     const clearInput = Object.assign(inputSettings);
+
     useEffect(()=>{
         imageURL && setFormInputs({
             ...formInputs,
-            cardSetting: {
-                ...formInputs?.cardSetting,
-                profileImageURL: encodeURI(imageURL)
-              }
+            image: encodeURI(imageURL)
         })
-    },[imageURL])
+    },[imageURL]);
+
     const formInputChange = (e) => {
         const checkType = e.target.getAttribute("data-check");
         const inputName = e.target.name;
+        if(e.target.name === "image") setImageURL(e.target.value);
         if(checkType === 'number' && (/[^\d]/g).test(e.target.value)){
             setInputError(true)
             const updateinputSettings = useInputSetting.map(item => (item.name === inputName) ? {...item, error: true} : item)
@@ -51,22 +52,36 @@ export const FormFormat = ({
         }
     }
 
+    const onImageToggleClick = () => setIsImageURLDrop(!isImageURLDrop);
+
     return (
         <div>
             {   isUploadImageAvailable &&
                     <div>
                         Upload Profile Image
+                        <div>
+                            <Switch 
+                                label='url-input' 
+                                defaultChecked 
+                                checked={!isImageURLDrop}
+                                onChange={onImageToggleClick}
+                                inputProps={{ 'aria-label': 'controlled' }}
+                                />
+                            input url or upload file?
+                        </div>
                         <UploadImageWrap>
-                            <ImageUpload setImageURL={setImageURL}/>
+                            { isImageURLDrop
+                                ? <ImageUpload setImageURL={setImageURL}/>
+                                : <InputStandard name="image" label="image url" onChange={formInputChange} />
+                            }
                             <ImageWrap>
-                                <img 
-                                    src={imageURL} alt="upload-image-preview" />
+                                <img src={imageURL} alt="upload-preview" />
                             </ImageWrap>
                         </UploadImageWrap>
                     </div>
             }
             {
-                useInputSetting.map((inputSetting)=> {
+                useInputSetting.map((inputSetting) => {
                     if(inputSetting.type === "text"){
                         return(
                             <InputStandard {...inputSetting} onChange={formInputChange} />
@@ -86,4 +101,4 @@ export const FormFormat = ({
     );
 };
 
-export default FormFormat;
+export default FormPreSet;

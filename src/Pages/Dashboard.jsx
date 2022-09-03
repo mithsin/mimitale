@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { userLogout } from 'States/cognitoSlice';
 
 import { useSelector } from 'react-redux';
 import { userData } from 'States/userSlice';

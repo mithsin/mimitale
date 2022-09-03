@@ -27,7 +27,19 @@ export const FullWidthFormContainer = styled.div`
 `;
 
 export const UploadImageWrap = styled.div`
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 1rem;
+    align-items: center;
+`;
+
+export const ImageWrap = styled.div`
+    height: 100%;
+    max-height: 100px;
+    width: 100%;
+    & img {
+        height: 100px;
+    }
 `;
 
 //FormFormat

@@ -106,8 +106,6 @@ export const WrapText = styled.p`
     margin: 0;
     padding: 0;
     text-transform: capitalize;
-    font-size: .645rem;
-    white-space: nowrap;
 `
 
 export const SelectedSectionWrapper = styled.div`
@@ -135,9 +133,3 @@ export const BackgroundImage = styled.div`
     background-position: center;
     ${props => `background-image: url(${props.image})`}
 `;
-
-export const SectionBodyWrap = styled.div`
-    width: 100%;
-    max-height: 450px;
-    overflow: auto;
-`

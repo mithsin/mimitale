@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom';
-import { CardWrap } from 'atoms';
+import { CardWrap } from 'Atoms';
 
 const Container = styled.div`
   width: 100%;
