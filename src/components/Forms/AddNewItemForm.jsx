@@ -49,7 +49,7 @@ export const AddNewItemForm = ({
             label: "description",
         },{
             type: "text",
-            "data-check": "text",
+            "data-check": "number",
             name: "points",
             label: "points",
         }
