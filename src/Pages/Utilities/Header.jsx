@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { userLogout } from 'States/cognitoSlice';
+import { userLogout } from '../../States/cognitoSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import useOnClickOutside from 'utils/useOnClickOutside';
+import useOnClickOutside from '../../utils/useOnClickOutside';
 // import NewCardForm from 'Components/ItemForm/NewCardForm';
 import {
     isSignIn,

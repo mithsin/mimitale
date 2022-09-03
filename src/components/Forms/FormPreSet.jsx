@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { InputStandard, RadioButtonsGroup, BasicButtons } from 'Atoms';
 import { ImageUpload } from 'Components/ImageUpload/ImageUpload';
