@@ -21,7 +21,7 @@ const SignUp = () => {
     const eventValue = event.target.value.trim();
     setInputValue({
       ...inputValue,
-      [idValue]: eventValue,
+      [idValue]: (idValue === "password") ? eventValue : eventValue.toLowerCase(),
     }) 
   }
 
