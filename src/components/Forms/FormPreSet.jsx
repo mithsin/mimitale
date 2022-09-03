@@ -55,14 +55,13 @@ export const FormPreSet = ({
                         <UploadImageWrap>
                             <ImageUpload setImageURL={setImageURL}/>
                             <ImageWrap>
-                                <img 
-                                    src={imageURL} alt="upload-image-preview" />
+                                <img src={imageURL} alt="upload-preview" />
                             </ImageWrap>
                         </UploadImageWrap>
                     </div>
             }
             {
-                useInputSetting.map((inputSetting)=> {
+                useInputSetting.map((inputSetting) => {
                     if(inputSetting.type === "text"){
                         return(
                             <InputStandard {...inputSetting} onChange={formInputChange} />

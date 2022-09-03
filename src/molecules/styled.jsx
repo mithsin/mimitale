@@ -1,6 +1,12 @@
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+export const AddNewItemBlockWrapper = styled.div`
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
 
 export const ItemBlockWrapper = styled.div`
     display: flex;

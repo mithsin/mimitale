@@ -3,7 +3,7 @@ import {
     SectionVerticalGridWrap,
     SectionGridWrap,
 } from './styled';
-import { ItemBlock, RowBlock } from 'Molecules';
+import { ItemBlock, AddNewItemBlock, RowBlock } from 'Molecules';
 
 export const ShowLayoutType = ({type, list, cardData}) => {
     const showType = {
@@ -22,14 +22,21 @@ export const ShowLayoutType = ({type, list, cardData}) => {
             <SectionGridWrap>
                 {
                     (list?.length > 0)
-                        ? list.map(item => {
+                        ? (<>   
+                            {list.map(item => {
                                 return(
                                     <ItemBlock 
                                         cardData={cardData}
                                         itemData={item} 
                                         type={type}/>
                                 )
-                            })
+                            })}
+                            <AddNewItemBlock 
+                                cardData={cardData}
+                                type={type}/>
+                        </>
+                            
+                          )
                         : <p>{type}</p>
                 }
             </SectionGridWrap>
