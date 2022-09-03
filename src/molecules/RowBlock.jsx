@@ -68,7 +68,6 @@ export const RowBlock = ({
         const {
             activeDate,
             fullfilledDate,
-            itemId,
             status,
          } = itemObj;
         return (

@@ -11,8 +11,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { ShowLayoutType } from '../Utilities/ShowLayoutType';
 
-import { updateCardItemsList } from 'States/userSlice';
-
 export const SelectedSectionLayout = (props) => {
     const [selectList, setSelectList] = useState([])
     const {
@@ -21,9 +19,8 @@ export const SelectedSectionLayout = (props) => {
     } = props;
     useEffect(()=>{
         setSelectList(cardData[selectedSection])
-    },[selectedSection])
-
-    console.log('cardData-->: ', cardData)
+    },[selectedSection]);
+    
     return (
         <SelectedSectionWrapper>
             <IconAbsoulteTopRight top="1rem" right="1rem" icon={faMaximize} />

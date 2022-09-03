@@ -20,13 +20,10 @@ export const ItemBlock = ({
 }) => {
     const {
         image,
-        points,
         itemName,
-        itemDescription,
     } = itemData;
     const [isModelOpen, setIsModelOpen] = useState(false)
     const onEditClick = () => {
-        console.log('open model');
         setIsModelOpen(true);
     }
 

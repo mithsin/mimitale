@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { CardOutterWrap } from './styled';
 import { ProfileImageSection, StarsSection, OptionsSwipe, SelectedSectionLayout } from './CardSections';
 
