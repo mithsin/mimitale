@@ -1,5 +1,5 @@
+// eslint-disable-line react-hooks/exhaustive-deps
 import { useEffect } from 'react';
-
 
 const useOnClickOutside = (ref, handler, subRef=null) => {
     useEffect(
@@ -21,7 +21,7 @@ const useOnClickOutside = (ref, handler, subRef=null) => {
           document.removeEventListener('touchstart', listener);
         };
       },
-      [ref, handler]
+      [ref, handler, subRef]
     );
   };
 

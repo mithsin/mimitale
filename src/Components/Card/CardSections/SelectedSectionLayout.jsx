@@ -1,3 +1,4 @@
+// eslint-disable-line react-hooks/exhaustive-deps
 import React, { useEffect, useState } from 'react';
 import { 
     SelectedSectionWrapper,
@@ -19,6 +20,7 @@ export const SelectedSectionLayout = (props) => {
     } = props;
     useEffect(()=>{
         setSelectList(cardData[selectedSection])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[selectedSection]);
     
     return (

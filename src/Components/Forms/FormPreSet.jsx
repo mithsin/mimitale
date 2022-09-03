@@ -82,7 +82,7 @@ export const FormPreSet = ({
                     </div>
             }
             {
-                useInputSetting.map((inputSetting) => {
+                useInputSetting.forEach((inputSetting) => {
                     if(inputSetting.type === "text"){
                         return(
                             <InputStandard {...inputSetting} onChange={formInputChange} />
@@ -93,7 +93,6 @@ export const FormPreSet = ({
                             <RadioButtonsGroup {...inputSetting} onChange={formInputChange} />
                         )
                     }
-                    return;
                 })
             }
             <ButtonWrap>

@@ -65,7 +65,7 @@ export const FormFormat = ({
                     </div>
             }
             {
-                useInputSetting.map((inputSetting)=> {
+                useInputSetting.forEach((inputSetting)=> {
                     if(inputSetting.type === "text"){
                         return(
                             <InputStandard {...inputSetting} onChange={formInputChange} />
