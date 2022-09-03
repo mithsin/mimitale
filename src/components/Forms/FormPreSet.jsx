@@ -24,10 +24,11 @@ export const FormPreSet = ({
             image: encodeURI(imageURL)
         })
     },[imageURL]);
-    console.log('imageurl-> ', imageURL)
+
     const formInputChange = (e) => {
         const checkType = e.target.getAttribute("data-check");
         const inputName = e.target.name;
+        if(e.target.name === "image") setImageURL(e.target.value);
         if(checkType === 'number' && (/[^\d]/g).test(e.target.value)){
             setInputError(true)
             const updateinputSettings = useInputSetting.map(item => (item.name === inputName) ? {...item, error: true} : item)

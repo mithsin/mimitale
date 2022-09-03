@@ -17,18 +17,19 @@ export const EditItemFrom = ({
     const deafultFormat = itemData
 
     const onClickSubmitEditItem = (formInputs) => {
-        console.log('cardData-->: ', cardData)
-        console.log('itemData-->: ', itemData)
-        console.log("edit-form-input: ", formInputs);
-        console.log('type-->: ', type)
-
+        const updateList = cardData[type].map((item)=> { 
+            return (item.itemId === formInputs.itemId) 
+                ? formInputs
+                : item;
+        })
+        // console.log('updatedItemList->: ', updateList)
         const params = {
             CardId: cardData?.CardId,
-            [type]: [formInputs]
+            [type]: updateList
         }
-        console.log('params--> ', params)
-        // dispatch(updateCardItemsList(params));
-        // setIsModelOpen(false);
+        // console.log('params--> ', params)
+        dispatch(updateCardItemsList(params));
+        setIsModelOpen(false);
     };
 
     // input box setting

@@ -6,8 +6,6 @@ import { FullWidthFormContainer } from './styled';
 import { FormPreSet } from './FormPreSet';
 import { Models } from 'Molecules/Models'; 
 
-
-
 export const AddNewItemForm = ({ 
     setIsModelOpen, 
     type, 
@@ -23,15 +21,13 @@ export const AddNewItemForm = ({
     };
 
     const onClickSubmitEditItem = (formInputs) => {
-       console.log('formInputs-> ', formInputs)
-
         const params = {
             CardId: cardData?.CardId,
             [type]: cardData[type].concat([{...formInputs, itemId: `${type}-${uuidv4()}`}])
         }
-        console.log('params--> ', params)
-        // dispatch(updateCardItemsList(params));
-        // setIsModelOpen(false);
+        // console.log('params--> ', params)
+        dispatch(updateCardItemsList(params));
+        setIsModelOpen(false);
     };
 
     // input box setting
