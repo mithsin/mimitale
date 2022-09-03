@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateCardItemsList } from 'States/userSlice';
 import { FullWidthFormContainer } from './styled';
 import { FormPreSet } from './FormPreSet';
-import { Models } from 'Molecules/Models'; 
-
-
+import { Models } from 'Molecules/Models';
+import Switch from '@mui/material/Switch';
+import { BasicButtons } from 'Atoms';
 
 export const EditItemFrom = ({ 
     setIsModelOpen, 
@@ -14,6 +14,7 @@ export const EditItemFrom = ({
     cardData 
 }) => {
     const dispatch = useDispatch();
+    const [showDeleteButton, setShowDeleteButton] = useState(false);
     const deafultFormat = itemData
 
     const onClickSubmitEditItem = (formInputs) => {
@@ -32,6 +33,21 @@ export const EditItemFrom = ({
         setIsModelOpen(false);
     };
 
+    const onDeleteToggleClick = () => setShowDeleteButton(!showDeleteButton);
+
+    const onDeleteClick = () => {
+        const updateList = cardData[type].filter((item) => {
+            return (item.itemId !== itemData.itemId)
+        })
+
+        const params = {
+            CardId: cardData?.CardId,
+            [type]: updateList
+        }
+        // console.log('params--> ', params)
+        dispatch(updateCardItemsList(params));
+        setIsModelOpen(false);
+    };
     // input box setting
     const inputSettings = [
         {
@@ -59,12 +75,25 @@ export const EditItemFrom = ({
         <Models setIsModelOpen={setIsModelOpen}>
             <h2>Edit Item</h2>
             <FullWidthFormContainer>
+                <div>
+                    <Switch 
+                        label='delete togglet' 
+                        defaultChecked 
+                        checked={showDeleteButton}
+                        onChange={onDeleteToggleClick}
+                        inputProps={{ 'aria-label': 'delete-toggle' }}
+                        />
+                    Delete
+                </div>
                 <FormPreSet
                     isUploadImageAvailable={true}
                     inputSettings={inputSettings}
                     defaultFormat={deafultFormat}
                     onClick={onClickSubmitEditItem}
+                    onDeleteClick={onDeleteClick}
+                    showDeleteButton={showDeleteButton}
                 />
+                 
             </FullWidthFormContainer>
         </Models>
     )
