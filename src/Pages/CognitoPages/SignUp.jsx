@@ -3,9 +3,9 @@ import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { InputStandard } from 'Atoms';
-import { FloatCard } from 'Molecules';
-import { userSignUp } from 'States/cognitoSlice';
+import { InputStandard } from '../../Atoms';
+import { FloatCard } from '../../Molecules';
+import { userSignUp } from '../../States/cognitoSlice';
 
 const SignUp = () => {
   const dispatch = useDispatch();

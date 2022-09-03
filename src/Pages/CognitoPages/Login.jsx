@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { isSignIn } from 'States/userSlice';
-import { userLogin, userLogout } from 'States/cognitoSlice';
+import { isSignIn } from '../../States/userSlice';
+import { userLogin, userLogout } from '../../States/cognitoSlice';
 
-import { FloatCard } from 'Molecules';
-import { InputStandard, CognitoButton } from 'Atoms';
-import { isObjFalsy } from 'utils/functions';
+import { FloatCard } from '../../Molecules';
+import { InputStandard, CognitoButton } from '../../Atoms';
+import { isObjFalsy } from '../../utils/functions';
 
 const Login = () => {
   const userSignIn = useSelector(isSignIn);

@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
-import { InputStandard } from 'Atoms';
-import { FloatCard } from 'Molecules';
-import { verificationAccount } from 'States/cognitoSlice';
-import { isObjFalsy } from 'utils/functions';
+import { InputStandard } from '../../Atoms';
+import { FloatCard } from '../../Molecules';
+// import { verificationAccount } from 'States/cognitoSlice';
+import { isObjFalsy } from '../../utils/functions';
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
     email: '',
   });
