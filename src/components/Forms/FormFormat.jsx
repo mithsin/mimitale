@@ -59,8 +59,7 @@ export const FormFormat = ({
                         <UploadImageWrap>
                             <ImageUpload setImageURL={setImageURL}/>
                             <ImageWrap>
-                                <img 
-                                    src={imageURL} alt="upload-image-preview" />
+                                <img src={imageURL} alt="upload-preview" />
                             </ImageWrap>
                         </UploadImageWrap>
                     </div>

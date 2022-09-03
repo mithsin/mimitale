@@ -92,6 +92,7 @@ export const FormPreSet = ({
                             <RadioButtonsGroup {...inputSetting} onChange={formInputChange} />
                         )
                     }
+                    return;
                 })
             }
             <ButtonWrap>

@@ -1,7 +1,5 @@
 import React from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { SwiperSlideWrap } from './styled'; 
-// Import Swiper styles
 import 'swiper/css';
 import { Pagination } from "swiper";
 

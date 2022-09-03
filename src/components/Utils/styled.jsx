@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { SwiperSlide } from 'swiper/react';
 
 
 export const SwiperSlideWrap = styled(SwiperSlide)`
