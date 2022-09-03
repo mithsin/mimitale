@@ -2,14 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { 
     SelectedSectionWrapper,
-    IconAbsoulteTopRight,
     UpperH3,
     SectionBodyWrap
 } from './styled';
-
-import { 
-    faMaximize
-} from '@fortawesome/free-solid-svg-icons';
 import { ShowLayoutType } from '../Utilities/ShowLayoutType';
 
 export const SelectedSectionLayout = (props) => {
@@ -23,10 +18,20 @@ export const SelectedSectionLayout = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[selectedSection]);
     
+    const showTitle = {
+        'shopItemList': "Shop Item",
+        'questItemList': "Quest Item",
+        'dailyQuestItemList': "Daily Quest Item",
+        'historyList': "History",
+        'tradePending': "Pending trade",
+        'completePending': "Pending Complete",
+        'requestItem': "Request Item",
+        'points': "Points",
+    }
+
     return (
         <SelectedSectionWrapper>
-            <IconAbsoulteTopRight top="1rem" right="1rem" icon={faMaximize} />
-            <UpperH3>{selectedSection}</UpperH3>
+            <UpperH3>{showTitle[selectedSection]}</UpperH3>
             <SectionBodyWrap>
                 <ShowLayoutType 
                     type={selectedSection}

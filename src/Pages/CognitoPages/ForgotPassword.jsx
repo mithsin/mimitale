@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import { InputStandard } from '../../Atoms';
 import { FloatCard } from '../../Molecules';
-// import { verificationAccount } from 'States/cognitoSlice';
+import { resendSMSVerifyCode } from 'States/cognitoSlice';
 import { isObjFalsy } from '../../utils/functions';
 
 const ForgotPassword = () => {

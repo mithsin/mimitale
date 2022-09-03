@@ -24,10 +24,10 @@ const Login = () => {
 
   const onInputChange = (event) => {
     const idValue = event.target.id;
-    const eventValue = event.target.value.trim();
+    const eventValue = event.target.eventValue.trim();
     setInputValue({
       ...inputValue,
-      [idValue]: eventValue,
+      [idValue]: (idValue === "password") ? eventValue : eventValue.toLowerCase(),
     }) 
   }
 
