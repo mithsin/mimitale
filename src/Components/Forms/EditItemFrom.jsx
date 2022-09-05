@@ -5,7 +5,6 @@ import { FullWidthFormContainer } from './styled';
 import { FormPreSet } from './FormPreSet';
 import { Models } from 'Molecules/Models';
 import Switch from '@mui/material/Switch';
-import { BasicButtons } from 'Atoms';
 
 export const EditItemFrom = ({ 
     setIsModelOpen, 
