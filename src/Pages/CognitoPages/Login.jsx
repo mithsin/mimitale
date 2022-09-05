@@ -24,7 +24,7 @@ const Login = () => {
 
   const onInputChange = (event) => {
     const idValue = event.target.id;
-    const eventValue = event.target.eventValue.trim();
+    const eventValue = event.target.value.trim();
     setInputValue({
       ...inputValue,
       [idValue]: (idValue === "password") ? eventValue : eventValue.toLowerCase(),
