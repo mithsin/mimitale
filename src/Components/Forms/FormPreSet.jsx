@@ -9,7 +9,9 @@ export const FormPreSet = ({
     defaultFormat,
     inputSettings,
     isUploadImageAvailable=false, 
-    onClick
+    onClick,
+    onDeleteClick,   
+    showDeleteButton
 }) => {
 
     const [formInputs, setFormInputs] = useState(defaultFormat ? defaultFormat : {});
@@ -97,6 +99,9 @@ export const FormPreSet = ({
                 })
             }
             <ButtonWrap>
+                {showDeleteButton && 
+                    <BasicButtons onClick={onDeleteClick} color="error" label="Delete" />
+                }       
                 <BasicButtons onClick={onButtonClicked} label="SUBMIT" />
             </ButtonWrap>
         </div>

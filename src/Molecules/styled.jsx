@@ -170,3 +170,46 @@ export const CloseIconWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
 `;
+
+//UserCardItemBlock
+export const SwipWrapper = styled.div`
+    padding: 1rem 0;
+    border-bottom: 1px solid;
+`;
+
+export const SlideItemWrap = styled.div`
+    max-width: 100px;
+    wdith: 100px;
+    padding: .5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #7b7b7b21;
+    border-radius: 15%;
+    cursor: pointer;
+    &:hover {
+        background-color: #00000021;
+    }
+`;
+
+export const SlideItemText = styled.p`
+    color: #000;
+    margin: 0;
+    padding: 0;
+    text-transform: capitalize;
+    font-size: .645rem;
+    white-space: nowrap;
+`;
+
+export const ImageWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-left: 0px;
+    padding: 1rem;
+    position: relative;
+    img {
+        ${props => `
+            border-radius: ${props.rounded ? '50%' : '100%' };
+            height: ${props.height || '100px'};
+        `}
+    }
+`;

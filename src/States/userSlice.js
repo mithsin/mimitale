@@ -176,7 +176,7 @@ export const createNewCard = (params) => dispatch => {
 }
 
 // delete a card by id
-export const DeleteCard = (params) => (dispatch, getState) => {
+export const deleteCard = (params) => (dispatch, getState) => {
     const giverFilterFullList = getState().userState.givingList.filter((card)=> card.CardId !== params.CardId );
     const giverFilterIdList = giverFilterFullList.map(card => card.CardId);
     const newParams = {...params, givingList: giverFilterIdList};
