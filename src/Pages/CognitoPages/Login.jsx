@@ -18,6 +18,11 @@ const Login = () => {
     password: ''
   });
   const [isDisabled, setIsDisabled] = useState(true);
+
+  useEffect(() => {
+    userSignIn && navigate('/')
+  },[userSignIn])
+
   useEffect(()=>{
     setIsDisabled(isObjFalsy(inputValue))
   },[inputValue])

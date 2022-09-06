@@ -87,6 +87,9 @@ export const {
 const UserAPI = process.env.REACT_APP_API_GATEWAY_URL;
 
 export const updateUserInitState = ( UserId, idToken ) => dispatch => {
+    // initial original data then call for update
+    dispatch(setLoginInitialState(JSON.parse(localStorage.getItem("userInitialState"))));
+
     axios.get(`${UserAPI}/user?UserId=${UserId}`, {
         headers: { 'Authorization' : idToken }
     })
@@ -94,6 +97,7 @@ export const updateUserInitState = ( UserId, idToken ) => dispatch => {
             if(res.data === null){
                 dispatch(setUserId(UserId))
             } else {
+                localStorage.setItem("userInitialState", JSON.stringify(res.data));
                 dispatch(setLoginInitialState({...res.data}));
             }
         })
@@ -111,7 +115,6 @@ export const updateUserShoppingList = ( params ) => dispatch => {
     // console.log('params==updateUserShoppingList==============>: ', params)
     axios.put(`${UserAPI}/user/shopping-list`, params, config)
         .then(res => {
-            console.log('updateCardItemsList-res->: ', res.data)
             if(res.data.status === 200){
                 params?.shopStoreList && dispatch(setShopStoreList(params.shopStoreList))
                 params?.shoppingList && dispatch(setShoppingList(params.shoppingList))
@@ -132,8 +135,8 @@ export const updateCardInfo = (params) => dispatch => {
     axios.put(`${UserAPI}/card`, params, config)
         .then(res => {
             if(res.data.status === 200){
-                dispatch(setUpdateCard(params));
-                dispatch(updateCardData(params));
+                dispatch(setUpdateCard({...params}));
+                dispatch(updateCardData({...params}));
             }
         })
         .catch(err => console.log('api-updatecard-err: ', err))
@@ -149,7 +152,7 @@ export const updateCardItemsList = (params) => dispatch => {
     // console.log('params==updateCardInfo==============>: ', params)
     axios.put(`${UserAPI}/card/items-list`, params, config)
         .then(res => {
-            console.log('updateCardItemsList-res->: ', res.data)
+         
             if(res.data.status === 200){
                 dispatch(setUpdateCard(params));
                 dispatch(updateCardData(params));

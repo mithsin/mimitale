@@ -14,7 +14,7 @@ export const Card = ({cardData}) => {
         setSelectedSection,
         cardData
     }
-
+    console.log('localdata-->: ', JSON.parse(localStorage.getItem("userInitialState")))
     return(
         <CardOutterWrap>
             <ProfileImageSection cardData={cardData}/>

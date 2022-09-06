@@ -32,7 +32,7 @@ const Dashboard = () => {
     const userDataState = useSelector(userData);
     const [openNewCardForm, setOpenNewCardForm] = useState(false);
     const [selectedUser, setSelectedUser] = useState();
-    const [showUser, setShowUser] = useState(initialState);
+    const [showUser, setShowUser] = useState({});
     useEffect(() => {
         userDataState?.givingList.length === 0 
             ? setOpenNewCardForm(true)
@@ -43,7 +43,7 @@ const Dashboard = () => {
         setShowUser(
             (selectedUser && userDataState?.givingList?.length > 1 && userDataState?.givingList.find(card => card.CardId === selectedUser)) ||
             (userDataState?.givingList?.length > 0 && userDataState?.givingList[0]) ||
-            (initialState)
+            ({})
         )
     },[userDataState?.givingList, selectedUser]);
 
@@ -59,7 +59,7 @@ const Dashboard = () => {
         <ListSection>
             <span>GIVING LIST</span>
             <ListWrap className='cardListCtn'>
-                <Card cardData={showUser} userTypeGiver={true}/>
+                {!openNewCardForm && <Card cardData={showUser} userTypeGiver={true}/>}
             </ListWrap>
         </ListSection>
 

@@ -17,10 +17,7 @@ const UserStatusProvider = ({ children }) => {
   useEffect(()=>{
     !userIsSignIn && dispatch(userLoginCheck());
   },[userIsSignIn])
-  // Check user status when page refresh.
   
-  
-  // console.log('UserStatusProvider-userIsSignIn--->', userIsSignIn)
     return (
         <UserStatusCheck.Provider >
             {children}
