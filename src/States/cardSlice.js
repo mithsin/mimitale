@@ -121,6 +121,14 @@ export const updateCardState = ( data, userId ) => dispatch => {
     dispatch(setCardState(fullData))
 }
 
+export const InitCardState = ( data ) => (dispatch, getState) => {
+    // const initLocalData = JSON.parse(localStorage.getItem("userInitialState"));
+    const originObj = getState().userState.givingList.find(card => card.CardId === data.CardId)
+
+    localStorage.setItem("cardInitialState", JSON.stringify(originObj));
+    dispatch(setCardState(originObj));
+}
+
 export const updateCardId = ( newCardId ) => (dispatch, getState) => {
     const fullData = getState().userState.givingList.find(cardInfo => cardInfo.CardId === newCardId);
     localStorage.setItem("cardInitialState", JSON.stringify(fullData));
