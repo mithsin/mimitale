@@ -122,9 +122,10 @@ export const updateCardState = ( data, userId ) => dispatch => {
 }
 
 export const InitCardState = ( data ) => (dispatch, getState) => {
-    const fullData = data || ({});
 
-    dispatch(setCardState(Object.assign(getState().cardState, fullData)))
+    const originObj = getState().userState.givingList.find(card => card.CardId === data.CardId)
+
+    dispatch(setCardState(originObj));
 }
 
 export const updateCardId = ( newCardId ) => (dispatch, getState) => {
