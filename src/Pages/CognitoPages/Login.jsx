@@ -21,7 +21,7 @@ const Login = () => {
 
   useEffect(() => {
     userSignIn && navigate('/')
-  },[userSignIn])
+  },[userSignIn, navigate])
 
   useEffect(()=>{
     setIsDisabled(isObjFalsy(inputValue))

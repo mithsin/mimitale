@@ -55,19 +55,19 @@ export const EditItemFrom = ({
             name: "itemName",
             required: true,
             label: "Title",
-            placeholder: itemData.itemName
+            placeholder: itemData?.itemName || ''
         },{
             type: "text",
             "data-check": "text",
             name: "itemDescription",
             label: "description",
-            placeholder: itemData.itemDescription
+            placeholder: itemData?.itemDescription || ''
         },{
             type: "text",
-            "data-check": "text",
+            "data-check": "number",
             name: "points",
             label: "points",
-            placeholder: itemData.points
+            placeholder: itemData?.points || "0"
         }
     ];
     return (

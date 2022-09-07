@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { updateCardData } from 'States/linkUserSlice';
+import { updateCardState, updateCardId } from 'States/cardSlice';
 
 export const userSlice = createSlice({
     name: 'userState',
@@ -9,7 +10,6 @@ export const userSlice = createSlice({
         userName: '',
         eMail: '',
         date: '',
-        cardSelected: '',
         givingList: [],
         receivingList: [],
         receivingPendingList: [],
@@ -18,9 +18,6 @@ export const userSlice = createSlice({
         isSignIn: false,
     },
     reducers: {
-        setCardSelected: (state, action) => {
-            state.cardSelected = action.payload;
-        },
         setUserId: (state, action) => {
             state.UserId = action.payload;
         },
@@ -74,7 +71,6 @@ export const userSlice = createSlice({
 });
  
 export const {
-    setCardSelected,
     setUserId,
     setEnterCredentials, 
     setIsSignInState,
@@ -93,7 +89,10 @@ const UserAPI = process.env.REACT_APP_API_GATEWAY_URL;
 
 export const updateUserInitState = ( UserId, idToken ) => dispatch => {
     // initial original data then call for update
-    dispatch(setLoginInitialState(JSON.parse(localStorage.getItem("userInitialState"))));
+    const initLocalData = JSON.parse(localStorage.getItem("userInitialState"));
+
+    dispatch(setLoginInitialState(initLocalData));
+    dispatch(updateCardState(initLocalData))
 
     axios.get(`${UserAPI}/user?UserId=${UserId}`, {
         headers: { 'Authorization' : idToken }
@@ -103,7 +102,9 @@ export const updateUserInitState = ( UserId, idToken ) => dispatch => {
                 dispatch(setUserId(UserId))
             } else {
                 localStorage.setItem("userInitialState", JSON.stringify(res.data));
+
                 dispatch(setLoginInitialState({...res.data}));
+                dispatch(updateCardState({...res.data}))
             }
         })
         .catch(err => console.log(err))
@@ -142,6 +143,7 @@ export const updateCardInfo = (params) => dispatch => {
             if(res.data.status === 200){
                 dispatch(setUpdateCard({...params}));
                 dispatch(updateCardData({...params}));
+                dispatch(updateCardId({...params}));
             }
         })
         .catch(err => console.log('api-updatecard-err: ', err))
@@ -161,6 +163,7 @@ export const updateCardItemsList = (params) => dispatch => {
             if(res.data.status === 200){
                 dispatch(setUpdateCard(params));
                 dispatch(updateCardData(params));
+                dispatch(updateCardId(params));
             }
         })
         .catch(err => console.log('api-updatecard-err: ', err))
@@ -208,6 +211,7 @@ export const linkUpdateCardUser = (params) => dispatch => {
             if(res.data.status === 200){
                 dispatch(setUpdateCard(params));
                 dispatch(updateCardData(params));
+                dispatch(updateCardId(params));
             }
         })
         .catch(err => console.log('api-updatecard-err: ', err))
@@ -237,7 +241,6 @@ export const cardAdaptAction = (params) => dispatch => {
 
 export const userData = state => state.userState;
 export const userName = state => state.userState.userName;
-export const cardSelected = state => state.userState.cardSelected;
 export const UserId = state => state.userState.UserId;
 export const eMail = state => state.userState.eMail;
 export const date = state => state.userState.date;

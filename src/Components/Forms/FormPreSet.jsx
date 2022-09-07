@@ -84,15 +84,15 @@ export const FormPreSet = ({
                     </div>
             }
             {
-                useInputSetting.map((inputSetting) => {
+                useInputSetting.map((inputSetting, index) => {
                     if(inputSetting.type === "text"){
                         return(
-                            <InputStandard {...inputSetting} onChange={formInputChange} />
+                            <InputStandard  key={`preset-key-`+ index} {...inputSetting} onChange={formInputChange} />
                         )
                     }
                     if(inputSetting.type === "radio"){
                         return(
-                            <RadioButtonsGroup {...inputSetting} onChange={formInputChange} />
+                            <RadioButtonsGroup  key={`preset-key-`+ index} {...inputSetting} onChange={formInputChange} />
                         )
                     }
                     return ''

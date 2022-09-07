@@ -6,8 +6,7 @@ import App from './App';
 import './index.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import UserStatusProvider from './utils/UserStatusProvider';
-import { persistor, store } from 'Store/store';
-import { PersistGate } from 'redux-persist/integration/react';
+import { store } from 'Store/store';
 
 const container = document.getElementById('root');
 const root = createRoot(container);

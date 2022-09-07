@@ -1,5 +1,7 @@
 // eslint-disable-line react-hooks/exhaustive-deps
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useAllOptionList } from 'States/cardSlice';
 import { 
     SelectedSectionWrapper,
     UpperH3,
@@ -8,6 +10,7 @@ import {
 import { ShowLayoutType } from '../Utilities/ShowLayoutType';
 
 export const SelectedSectionLayout = (props) => {
+    const getAllOptionList = useSelector(useAllOptionList)  
     const [selectList, setSelectList] = useState([])
     const {
         selectedSection,
@@ -16,8 +19,10 @@ export const SelectedSectionLayout = (props) => {
     useEffect(()=>{
         setSelectList(cardData[selectedSection])
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[selectedSection]);
-    
+    },[
+        selectedSection, 
+        getAllOptionList
+    ]);
     const showTitle = {
         'shopItemList': "Shop Item",
         'questItemList': "Quest Item",

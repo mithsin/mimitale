@@ -2,31 +2,33 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setCardSelected } from 'States/userSlice';
 import { ProfileImage } from 'Molecules';
+import { useDispatch } from 'react-redux';
+import { updateCardId } from 'States/cardSlice';
+
 import SwipComponent from 'Components/Utils/SwipComponent';
 import { 
     SwipWrapper,
     SlideItemWrap,
     SlideItemText
 } from './styled';
-export const UserSwipBlock = ({
-    givingList,
-    setSelectedUser
-}) => {
-  const dispatch = useDispatch();
 
-    const WrapCont = ({slide}) => {
-        const { CardId, nickName } = slide;
-        const onSlideClick = () => {
-          dispatch(setCardSelected(CardId))
-          setSelectedUser(CardId)
-        }
-        return (
-          <SlideItemWrap onClick={onSlideClick}>
-            <ProfileImage cardData={slide}/>
-            <SlideItemText>{nickName}</SlideItemText>
-          </SlideItemWrap>
-        )
-      };
+const WrapCont = ({slide}) => {  
+  const dispatch = useDispatch();
+  const { CardId, nickName } = slide;
+  const onClickUser = () => {
+    dispatch(updateCardId(CardId))
+  };
+  return (
+    <SlideItemWrap onClick={onClickUser}>
+      <ProfileImage cardData={slide}/>
+      <SlideItemText>{nickName}</SlideItemText>
+    </SlideItemWrap>
+  )
+};
+
+export const UserSwipBlock = ({
+    givingList
+}) => {
     return(
         <SwipWrapper>
             <SwipComponent 

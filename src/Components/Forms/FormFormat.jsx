@@ -65,15 +65,15 @@ export const FormFormat = ({
                     </div>
             }
             {
-                useInputSetting.map((inputSetting)=> {
+                useInputSetting.map((inputSetting, index)=> {
                     if(inputSetting.type === "text"){
                         return(
-                            <InputStandard {...inputSetting} onChange={formInputChange} />
+                            <InputStandard key={`input-key-`+ index} {...inputSetting} onChange={formInputChange} />
                         )
                     }
                     if(inputSetting.type === "radio"){
                         return(
-                            <RadioButtonsGroup {...inputSetting} onChange={formInputChange} />
+                            <RadioButtonsGroup key={`input-key-`+ index} {...inputSetting} onChange={formInputChange} />
                         )
                     }
                     return ''
