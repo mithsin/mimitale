@@ -154,5 +154,18 @@ export const useHistoryList = state => state.cardState.historyList;
 export const useRequestItem = state => state.cardState.requestItem;
 export const useTradePending = state => state.cardState.tradePending;
 export const useContributors = state => state.cardState.contributors;
+export const useAllOptionList = state => { 
+    return {
+    pendingRewardPoints: state.cardState.pendingRewardPoints,
+    pendingTradePoints: state.cardState.pendingTradePoints,
+    points: state.cardState.points,
+    shopItemList: state.cardState.shopItemList,
+    completePending: state.cardState.completePending,
+    questItemList: state.cardState.questItemList,
+    dailyQuestItemList: state.cardState.dailyQuestItemList,
+    historyList: state.cardState.historyList,
+    requestItem: state.cardState.requestItem,
+    tradePending: state.cardState.tradePending
+}}
 
 export default cardSlice.reducer;
