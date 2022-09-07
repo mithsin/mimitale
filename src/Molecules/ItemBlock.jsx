@@ -6,7 +6,7 @@ import {
     IconAbsoulteTopRight,
     PointsBottomRight
 } from './styled';
-
+import Tooltip from '@mui/material/Tooltip';
 import {
     faCircleInfo
 } from '@fortawesome/free-solid-svg-icons';
@@ -21,17 +21,20 @@ export const ItemBlock = ({
     const {
         image,
         itemName,
+        itemDescription
     } = itemData;
     const [isModelOpen, setIsModelOpen] = useState(false)
     const onEditClick = () => {
         setIsModelOpen(true);
     }
-
+    console.log('itemData', itemData)
     return (
         <>
             <ItemBlockWrapper>
                 <BackgroundImage image={image}>
-                    <IconAbsoulteTopRight icon={faCircleInfo}/>
+                    <Tooltip title={itemDescription}>
+                        <IconAbsoulteTopRight icon={faCircleInfo}/>
+                    </Tooltip>
                     <PointsBottomRight color="green">50</PointsBottomRight>
                 </BackgroundImage>
                 <div className="textWrapper">
