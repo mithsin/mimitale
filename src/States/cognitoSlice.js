@@ -54,9 +54,9 @@ export const userLoginCheck = () => dispatch => {
         userPool.getCurrentUser().getSession((err, session) => {
             if(err){console.log('userPool.getCurrentUser() err---->', err)}
             const idToken = session?.getIdToken().getJwtToken();
-            console.log('userPool.getCurrentUser()--> ', userPool.getCurrentUser())
+ 
             dispatch(setIdToken(idToken))
-            dispatch(updateUserInitState(userPool.getCurrentUser().username, idToken))
+            dispatch(updateUserInitState(session?.getIdToken()?.payload?.sub, idToken))
             dispatch(setUserName(userPool.getCurrentUser().username))
             dispatch(setIsSignInState(true))
           });
@@ -96,6 +96,8 @@ export const userLogin = ({userName, password, navigate}) => dispatch => {
 
 // AWS cognito Logout
 export const userLogout = ({navigate}) => dispatch => {
+    localStorage.setItem("userInitialState", JSON.stringify({}));
+
     if(userPool.getCurrentUser()){
         dispatch(setAccessToken(''));
         dispatch(setIdToken(''));

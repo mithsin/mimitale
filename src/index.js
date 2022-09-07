@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 import './index.css';
 import { BrowserRouter as Router } from 'react-router-dom';
+import UserStatusProvider from './utils/UserStatusProvider';
 import { persistor, store } from 'Store/store';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -12,13 +13,15 @@ const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
-  <React.Suspense fallback={<div>...LOADING</div>}>
+  <React.Suspense fallback={<div>MIMITALE</div>}>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Router>
-          <App />
-        </Router>
-      </PersistGate>
+      <UserStatusProvider>
+        {/* <PersistGate loading={null} persistor={persistor}> */}
+          <Router>
+            <App />
+          </Router>
+        {/* </PersistGate> */}
+      </UserStatusProvider>
     </Provider>
   </React.Suspense>
 );

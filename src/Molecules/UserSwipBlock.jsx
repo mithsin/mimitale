@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { setCardSelected } from 'States/userSlice';
 import { ProfileImage } from 'Molecules';
 import SwipComponent from 'Components/Utils/SwipComponent';
 import { 
@@ -10,12 +12,16 @@ export const UserSwipBlock = ({
     givingList,
     setSelectedUser
 }) => {
+  const dispatch = useDispatch();
 
     const WrapCont = ({slide}) => {
         const { CardId, nickName } = slide;
-
+        const onSlideClick = () => {
+          dispatch(setCardSelected(CardId))
+          setSelectedUser(CardId)
+        }
         return (
-          <SlideItemWrap onClick={()=> setSelectedUser(CardId)}>
+          <SlideItemWrap onClick={onSlideClick}>
             <ProfileImage cardData={slide}/>
             <SlideItemText>{nickName}</SlideItemText>
           </SlideItemWrap>

@@ -6,7 +6,6 @@ import { staticOptionList } from './Utilities/support';
 
 
 export const Card = ({cardData}) => {
-    console.log('Card-cardData-->: ', cardData)
     const [selectedSection, setSelectedSection] = useState(staticOptionList[0]['dataListName']);
 
     const propsList = {
@@ -14,7 +13,7 @@ export const Card = ({cardData}) => {
         setSelectedSection,
         cardData
     }
-
+   
     return(
         <CardOutterWrap>
             <ProfileImageSection cardData={cardData}/>

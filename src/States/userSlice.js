@@ -9,14 +9,18 @@ export const userSlice = createSlice({
         userName: '',
         eMail: '',
         date: '',
+        cardSelected: '',
         givingList: [],
         receivingList: [],
         receivingPendingList: [],
         shopStoreList: [],
         shoppingList: [],
-        isSignIn: false
+        isSignIn: false,
     },
     reducers: {
+        setCardSelected: (state, action) => {
+            state.cardSelected = action.payload;
+        },
         setUserId: (state, action) => {
             state.UserId = action.payload;
         },
@@ -55,7 +59,7 @@ export const userSlice = createSlice({
                 ? item
                 : {...item, ...action.payload};
             })
-            return {...state, givingList: givingArr, receivingList: receivingArr}
+            return Object.assign(state, {givingList: givingArr, receivingList: receivingArr});
         },
         setUpdateNewCard: (state, action) => {
             return {
@@ -70,6 +74,7 @@ export const userSlice = createSlice({
 });
  
 export const {
+    setCardSelected,
     setUserId,
     setEnterCredentials, 
     setIsSignInState,
@@ -87,6 +92,9 @@ export const {
 const UserAPI = process.env.REACT_APP_API_GATEWAY_URL;
 
 export const updateUserInitState = ( UserId, idToken ) => dispatch => {
+    // initial original data then call for update
+    dispatch(setLoginInitialState(JSON.parse(localStorage.getItem("userInitialState"))));
+
     axios.get(`${UserAPI}/user?UserId=${UserId}`, {
         headers: { 'Authorization' : idToken }
     })
@@ -94,6 +102,7 @@ export const updateUserInitState = ( UserId, idToken ) => dispatch => {
             if(res.data === null){
                 dispatch(setUserId(UserId))
             } else {
+                localStorage.setItem("userInitialState", JSON.stringify(res.data));
                 dispatch(setLoginInitialState({...res.data}));
             }
         })
@@ -111,7 +120,6 @@ export const updateUserShoppingList = ( params ) => dispatch => {
     // console.log('params==updateUserShoppingList==============>: ', params)
     axios.put(`${UserAPI}/user/shopping-list`, params, config)
         .then(res => {
-            console.log('updateCardItemsList-res->: ', res.data)
             if(res.data.status === 200){
                 params?.shopStoreList && dispatch(setShopStoreList(params.shopStoreList))
                 params?.shoppingList && dispatch(setShoppingList(params.shoppingList))
@@ -132,8 +140,8 @@ export const updateCardInfo = (params) => dispatch => {
     axios.put(`${UserAPI}/card`, params, config)
         .then(res => {
             if(res.data.status === 200){
-                dispatch(setUpdateCard(params));
-                dispatch(updateCardData(params));
+                dispatch(setUpdateCard({...params}));
+                dispatch(updateCardData({...params}));
             }
         })
         .catch(err => console.log('api-updatecard-err: ', err))
@@ -149,7 +157,7 @@ export const updateCardItemsList = (params) => dispatch => {
     // console.log('params==updateCardInfo==============>: ', params)
     axios.put(`${UserAPI}/card/items-list`, params, config)
         .then(res => {
-            console.log('updateCardItemsList-res->: ', res.data)
+         
             if(res.data.status === 200){
                 dispatch(setUpdateCard(params));
                 dispatch(updateCardData(params));
@@ -229,6 +237,7 @@ export const cardAdaptAction = (params) => dispatch => {
 
 export const userData = state => state.userState;
 export const userName = state => state.userState.userName;
+export const cardSelected = state => state.userState.cardSelected;
 export const UserId = state => state.userState.UserId;
 export const eMail = state => state.userState.eMail;
 export const date = state => state.userState.date;
