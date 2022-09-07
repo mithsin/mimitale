@@ -159,7 +159,6 @@ export const updateCardItemsList = (params) => dispatch => {
 
     axios.put(`${UserAPI}/card/items-list`, params, config)
         .then(res => {
-         
             if(res.data.status === 200){
                 dispatch(setUpdateCard(params));
                 dispatch(updateCardData(params));
