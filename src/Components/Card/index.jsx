@@ -18,6 +18,7 @@ export const Card = () => {
         setSelectedSection,
         cardData
     }
+    
     return(
         <CardOutterWrap>
             <ProfileImageSection cardData={cardData}/>

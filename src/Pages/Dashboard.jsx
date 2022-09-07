@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { userData } from '../States/userSlice';
-import { NewCardForm } from '../Components/Forms';
-import { Card } from '../Components/Card';
+import { userData } from 'States/userSlice';
+import { NewCardForm } from 'Components/Forms';
+import { Card } from 'Components/Card';
 import { UserSwipBlock } from 'Molecules';
 
 import { DashboardBodyWrap, ListSection, ListWrap } from './styled';

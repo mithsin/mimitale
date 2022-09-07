@@ -117,19 +117,13 @@ export const updateCardState = ( data, userId ) => dispatch => {
     const fullData = (userId && data?.givingList?.length > 1 && data?.givingList.find(card => card.CardId === userId)) ||
     (data?.givingList?.length > 0 && data?.givingList[0]) ||
     ({});
-
+    localStorage.setItem("cardInitialState", JSON.stringify(fullData));
     dispatch(setCardState(fullData))
-}
-
-export const InitCardState = ( data ) => (dispatch, getState) => {
-
-    const originObj = getState().userState.givingList.find(card => card.CardId === data.CardId)
-
-    dispatch(setCardState(originObj));
 }
 
 export const updateCardId = ( newCardId ) => (dispatch, getState) => {
     const fullData = getState().userState.givingList.find(cardInfo => cardInfo.CardId === newCardId);
+    localStorage.setItem("cardInitialState", JSON.stringify(fullData));
 
     dispatch(setCardState(fullData))
 }

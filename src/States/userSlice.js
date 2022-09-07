@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { updateCardData } from 'States/linkUserSlice';
-import { updateCardState, InitCardState } from 'States/cardSlice';
+import { updateCardState, updateCardId } from 'States/cardSlice';
 
 export const userSlice = createSlice({
     name: 'userState',
@@ -90,6 +90,7 @@ const UserAPI = process.env.REACT_APP_API_GATEWAY_URL;
 export const updateUserInitState = ( UserId, idToken ) => dispatch => {
     // initial original data then call for update
     const initLocalData = JSON.parse(localStorage.getItem("userInitialState"));
+
     dispatch(setLoginInitialState(initLocalData));
     dispatch(updateCardState(initLocalData))
 
@@ -101,6 +102,7 @@ export const updateUserInitState = ( UserId, idToken ) => dispatch => {
                 dispatch(setUserId(UserId))
             } else {
                 localStorage.setItem("userInitialState", JSON.stringify(res.data));
+
                 dispatch(setLoginInitialState({...res.data}));
                 dispatch(updateCardState({...res.data}))
             }
@@ -141,7 +143,7 @@ export const updateCardInfo = (params) => dispatch => {
             if(res.data.status === 200){
                 dispatch(setUpdateCard({...params}));
                 dispatch(updateCardData({...params}));
-                dispatch(InitCardState({...params}));
+                dispatch(updateCardId({...params}));
             }
         })
         .catch(err => console.log('api-updatecard-err: ', err))
@@ -161,7 +163,7 @@ export const updateCardItemsList = (params) => dispatch => {
             if(res.data.status === 200){
                 dispatch(setUpdateCard(params));
                 dispatch(updateCardData(params));
-                dispatch(InitCardState(params));
+                dispatch(updateCardId(params));
             }
         })
         .catch(err => console.log('api-updatecard-err: ', err))
@@ -209,7 +211,7 @@ export const linkUpdateCardUser = (params) => dispatch => {
             if(res.data.status === 200){
                 dispatch(setUpdateCard(params));
                 dispatch(updateCardData(params));
-                dispatch(InitCardState(params));
+                dispatch(updateCardId(params));
             }
         })
         .catch(err => console.log('api-updatecard-err: ', err))
