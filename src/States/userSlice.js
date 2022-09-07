@@ -9,14 +9,18 @@ export const userSlice = createSlice({
         userName: '',
         eMail: '',
         date: '',
+        cardSelected: '',
         givingList: [],
         receivingList: [],
         receivingPendingList: [],
         shopStoreList: [],
         shoppingList: [],
-        isSignIn: false
+        isSignIn: false,
     },
     reducers: {
+        setCardSelected: (state, action) => {
+            state.cardSelected = action.payload;
+        },
         setUserId: (state, action) => {
             state.UserId = action.payload;
         },
@@ -55,7 +59,7 @@ export const userSlice = createSlice({
                 ? item
                 : {...item, ...action.payload};
             })
-            return {...state, givingList: givingArr, receivingList: receivingArr}
+            return Object.assign(state, {givingList: givingArr, receivingList: receivingArr});
         },
         setUpdateNewCard: (state, action) => {
             return {
@@ -70,6 +74,7 @@ export const userSlice = createSlice({
 });
  
 export const {
+    setCardSelected,
     setUserId,
     setEnterCredentials, 
     setIsSignInState,
@@ -232,6 +237,7 @@ export const cardAdaptAction = (params) => dispatch => {
 
 export const userData = state => state.userState;
 export const userName = state => state.userState.userName;
+export const cardSelected = state => state.userState.cardSelected;
 export const UserId = state => state.userState.UserId;
 export const eMail = state => state.userState.eMail;
 export const date = state => state.userState.date;
