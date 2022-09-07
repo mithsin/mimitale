@@ -1,8 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setCardSelected } from 'States/userSlice';
 import { ProfileImage } from 'Molecules';
-import { useDispatch } from 'react-redux';
 import { updateCardId } from 'States/cardSlice';
 
 import SwipComponent from 'Components/Utils/SwipComponent';

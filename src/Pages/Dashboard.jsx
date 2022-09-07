@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { userData } from 'States/userSlice';
+import { givingList } from 'States/userSlice';
 import { NewCardForm } from 'Components/Forms';
 import { Card } from 'Components/Card';
 import { UserSwipBlock } from 'Molecules';
@@ -10,20 +10,20 @@ import { DashboardBodyWrap, ListSection, ListWrap } from './styled';
 
 const Dashboard = () => {
 
-    const userDataState = useSelector(userData);
+    const givingListState = useSelector(givingList);
     const [openNewCardForm, setOpenNewCardForm] = useState(false);
     useEffect(() => {
-        userGivingList.length === 0 
+        givingListState.length === 0 
             ? setOpenNewCardForm(true)
             : setOpenNewCardForm(false);
-    },[userGivingList])
+    },[givingListState])
 
     return(
     <DashboardBodyWrap>
         HOME PAGE
-        { userGivingList?.length > 1 &&
+        { givingListState?.length > 1 &&
             <UserSwipBlock
-                givingList={userDataState?.givingList}
+                givingList={givingListState}
             />
         }
         <ListSection>
