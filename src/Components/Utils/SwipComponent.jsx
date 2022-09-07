@@ -23,8 +23,8 @@ export const SwipComponent = ({
       // onSwiper={(swiper) => console.log(swiper)}
     >
       {
-        slideList.map(slide => 
-          <SwiperSlide style={{width: '100px'}}>
+        slideList.map((slide, index) => 
+          <SwiperSlide key={'slide-' + index} style={{width: '100px'}}>
             <WrapCont slide={slide} />
           </SwiperSlide>    
         )

@@ -67,7 +67,7 @@ export const EditItemFrom = ({
             "data-check": "number",
             name: "points",
             label: "points",
-            placeholder: itemData?.points || 0
+            placeholder: itemData?.points || "0"
         }
     ];
     return (

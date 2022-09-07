@@ -23,9 +23,10 @@ export const ShowLayoutType = ({type, list, cardData}) => {
                 {
                     (list?.length > 0)
                         ? (<>   
-                            {list.map(item => {
+                            {list.map((item, index) => {
                                 return(
                                     <ItemBlock 
+                                        key={'itemblock-' + index}
                                         cardData={cardData}
                                         itemData={item} 
                                         type={type}/>
@@ -48,9 +49,10 @@ export const ShowLayoutType = ({type, list, cardData}) => {
             <SectionVerticalGridWrap>
                 {
                     (list?.length > 0)
-                        ? list.map(item => {
+                        ? list.map((item, index) => {
                                 return(
                                     <RowBlock
+                                        key={'RowBlock-' + index}
                                         cardData={cardData}
                                         itemData={item} 
                                         type={type}/>

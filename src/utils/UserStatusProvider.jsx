@@ -19,7 +19,7 @@ const UserStatusProvider = ({ children }) => {
   },[userIsSignIn])
   
     return (
-        <UserStatusCheck.Provider >
+        <UserStatusCheck.Provider value={null}>
             {children}
         </UserStatusCheck.Provider>
     );
