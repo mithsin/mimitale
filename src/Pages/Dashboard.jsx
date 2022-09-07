@@ -13,15 +13,15 @@ const Dashboard = () => {
     const userDataState = useSelector(userData);
     const [openNewCardForm, setOpenNewCardForm] = useState(false);
     useEffect(() => {
-        userDataState?.givingList.length === 0 
+        userGivingList.length === 0 
             ? setOpenNewCardForm(true)
             : setOpenNewCardForm(false);
-    },[userDataState?.givingList])
+    },[userGivingList])
 
     return(
     <DashboardBodyWrap>
         HOME PAGE
-        { userDataState?.givingList?.length > 1 &&
+        { userGivingList?.length > 1 &&
             <UserSwipBlock
                 givingList={userDataState?.givingList}
             />
