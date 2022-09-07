@@ -29,7 +29,6 @@ export const NewCardForm = ({setOpenNewCardForm}) => {
             ...newCardDefaultShopAndTrade,
             ...formInputs
         }
-        console.log('params--> ', params)
         dispatch(createNewCard(params));
         setOpenNewCardForm(false);
     };

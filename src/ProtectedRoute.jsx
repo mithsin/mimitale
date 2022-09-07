@@ -9,7 +9,7 @@ const ProtectedRoute = ({
 }) => {
   const userSignIn = useSelector(isSignIn);
   // const userSignIn = true;
-  console.log('ProtectedRoute-userSignIn->: ', userSignIn)
+  // console.log('ProtectedRoute-userSignIn->: ', userSignIn)
 
   if (!userSignIn) {
     return <Navigate to={redirectPath} replace />;
