@@ -156,20 +156,17 @@ export const updateCardItemsList = (params) => dispatch => {
         },
         data: {},
     };
-    console.log('params==updateCardInfo==============>: ', params)
+
+    axios.put(`${UserAPI}/card/items-list`, params, config)
+        .then(res => {
+         
+            if(res.data.status === 200){
                 dispatch(setUpdateCard(params));
                 dispatch(updateCardData(params));
                 dispatch(InitCardState(params));
-    // axios.put(`${UserAPI}/card/items-list`, params, config)
-    //     .then(res => {
-         
-    //         if(res.data.status === 200){
-    //             dispatch(setUpdateCard(params));
-    //             dispatch(updateCardData(params));
-    //             dispatch(InitCardState(params));
-    //         }
-    //     })
-    //     .catch(err => console.log('api-updatecard-err: ', err))
+            }
+        })
+        .catch(err => console.log('api-updatecard-err: ', err))
 }
 
 // update card info aws /card
