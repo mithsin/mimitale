@@ -11,6 +11,7 @@ import { staticOptionList } from './Utilities/support';
 
 export const Card = () => {
     const cardData = useSelector(useFullCardData);
+    const [openCardSetting, setOpenCardSetting] = useState(false);
     const [selectedSection, setSelectedSection] = useState(staticOptionList[0]['dataListName']);
     const propsList = {
         selectedSection,
@@ -20,8 +21,9 @@ export const Card = () => {
     
     return(
         <CardOutterWrap>
-            <CardSetting cardData={cardData} setOpenCardSetting={()=>{}}/>
-            <ProfileImageSection cardData={cardData}/>
+            {openCardSetting && 
+                <CardSetting cardData={cardData} setOpenCardSetting={setOpenCardSetting}/>}
+            <ProfileImageSection cardData={cardData}  setOpenCardSetting={setOpenCardSetting}/>
             <StarsSection cardData={cardData}/>
             <OptionsSwipe {...propsList} />
             <SelectedSectionLayout {...propsList}/>

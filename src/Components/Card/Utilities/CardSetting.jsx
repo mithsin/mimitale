@@ -4,12 +4,9 @@ import { InputStandard, BasicButtons } from 'Atoms';
 import { Models } from 'Molecules/Models';
 import { ImageUploadBlock } from 'Molecules/ImageUploadBlock';
 import {
-  Button,
   ListItemText,
   ListItem,
-  List,
   Switch } from '@mui/material';
-import ImageUpload from 'Components/ImageUpload/ImageUpload';
 import { updateCardInfo, deleteCard, linkUpdateCardUser } from 'States/userSlice';
 
 import { ButtonWrap, InputLinkWrap } from './styled';
@@ -34,6 +31,7 @@ export const CardSetting = ({cardData, setOpenCardSetting}) => {
           profileImageURL: profileImageURL,
           bgImageURL: bgImageURL
       })
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   },[bgImageURL, profileImageURL])
   useEffect(()=>{
     const varReceiverPending = cardData?.cardSetting?.receiverPending;
@@ -43,6 +41,7 @@ export const CardSetting = ({cardData, setOpenCardSetting}) => {
     } else {
       setAdaptBtnDisabled(false)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   const onClickUpdatePersonalCardSetting = () => {
@@ -94,7 +93,7 @@ const onPrivateOn = () => {
 }
 
   return (
-    <Models>
+    <Models setIsModelOpen={setOpenCardSetting}>
       <ImageUploadBlock
           title="Change Profile Image"
           setImage={setProfileImageURL}

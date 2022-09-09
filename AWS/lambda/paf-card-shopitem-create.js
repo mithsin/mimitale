@@ -17,7 +17,6 @@ exports.handler = (event, context, callback) => {
             console.log(err);
             callback(err);
         } else {
-            console.log(data);
             callback(null, { status: 200, upload_status: 'success' });
         }
     });

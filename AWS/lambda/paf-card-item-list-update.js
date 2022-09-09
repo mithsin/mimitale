@@ -61,7 +61,6 @@ allEvent.forEach(evntlist =>{
             console.log(err);
             callback(err);
         } else {
-            console.log(data.Item);
             callback(null, { status: 200, upload_status: 'success', data: data.Item });
         }
     });

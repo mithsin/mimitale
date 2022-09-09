@@ -15,17 +15,16 @@ export const ImageUploadBlock = ({
 
     const imageCallBack = useCallback(() => {
         imageURL && setImage(imageURL)
-    },[imageURL]) 
+    },[imageURL, setImage]) 
 
     useEffect(()=>{
-        imageCallBack()
+        imageCallBack();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[imageURL]);
 
     const onImageChange = (e) => {
         setImageURL(e.target.value);
     }
-
-    console.log('imageURL-> ', imageURL)
 
     return (
         <ImageUploadBlockWrapper>
