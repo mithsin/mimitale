@@ -4,15 +4,14 @@ import { useFullCardData } from 'States/cardSlice';
 
 import { useSelector } from 'react-redux';
 import { ProfileImageSection, StarsSection, OptionsSwipe, SelectedSectionLayout } from './CardSections';
+import { CardSetting } from './Utilities/CardSetting';
 
 import { staticOptionList } from './Utilities/support';
 
 
 export const Card = () => {
     const cardData = useSelector(useFullCardData);
-
     const [selectedSection, setSelectedSection] = useState(staticOptionList[0]['dataListName']);
-
     const propsList = {
         selectedSection,
         setSelectedSection,
@@ -21,6 +20,7 @@ export const Card = () => {
     
     return(
         <CardOutterWrap>
+            <CardSetting cardData={cardData} setOpenCardSetting={()=>{}}/>
             <ProfileImageSection cardData={cardData}/>
             <StarsSection cardData={cardData}/>
             <OptionsSwipe {...propsList} />
