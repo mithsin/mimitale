@@ -27,7 +27,7 @@ export const ItemBlock = ({
     const onEditClick = () => {
         setIsModelOpen(true);
     }
-    console.log('itemData', itemData)
+   
     return (
         <>
             <ItemBlockWrapper>

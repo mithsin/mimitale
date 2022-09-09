@@ -213,3 +213,30 @@ export const ImageWrapper = styled.div`
         `}
     }
 `;
+
+
+//ImageUploadBlock
+export const ImageUploadBlockWrapper = styled.div`
+    border-bottom: 2px dotted #e6e6e6;
+`;
+
+export const UploadImageWrap = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    align-items: center;
+`;
+
+export const ImageTextWrap = styled.div`
+    display: flex;
+    align-items: center;
+`
+
+export const ImageWrap = styled.div`
+    height: 100%;
+    max-height: 100px;
+    width: 100%;
+    & img {
+        height: 100px;
+    }
+`;

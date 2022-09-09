@@ -10,13 +10,17 @@ import {
     ImageContainer, 
 } from './styled';
 
-export const ProfileImageSection = ({cardData}) => {
+export const ProfileImageSection = ({cardData, setOpenCardSetting}) => {
     const { profileImage, receiverGender, nickName } = cardData;
     const girlAnimateImg = "https://cdna.artstation.com/p/assets/images/images/001/690/356/medium/jay-choi-19.jpg?1450951074";
     const boyAnimateImg = "https://i.pinimg.com/736x/20/35/76/203576cfc2b68dc061360f47602ba06d.jpg";
+
+    const onOpenCardSettingClick = () => {
+        console.log('clicked')
+        setOpenCardSetting(true)};
     return (
         <ImageContainer>
-            <ImageContWrap>
+            <ImageContWrap  onClick={onOpenCardSettingClick}>
                 <FontAwesomeIcon icon={faEllipsisVertical}/>
             </ImageContWrap>
             {

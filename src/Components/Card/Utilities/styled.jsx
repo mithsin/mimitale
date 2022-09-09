@@ -133,3 +133,51 @@ export const BackgroundImage = styled.div`
     background-position: center;
     ${props => `background-image: url(${props.image})`}
 `;
+
+//CardSetting
+
+export const Root = styled.div`
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
+    border: '1px solid black',
+    borderRadius: "6px",
+    marginBottom: "6px",
+`
+export const ListItem = styled.div`
+    display: 'flex',
+    justifyContent: 'center'
+`
+   
+export const ListItemImage = styled.div`
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    '& #dropbox': {
+    width: '100%'
+    }
+`
+export const ListItemCopyLink = styled.div`
+    flexDirection: 'column',
+    '& input': {
+        margin: '0px',
+    },
+    '& button' : {
+        minWidth: '150px',
+    }
+`
+
+export const ButtonWrap = styled.div`
+    display: flex;
+    justify-content: flex-end;
+`
+
+export const InputLinkWrap = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & button {
+        height: 55px;
+        width: 150px;
+        margin-left: 1rem;
+    }
+`
