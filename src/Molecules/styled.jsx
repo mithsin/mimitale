@@ -25,22 +25,7 @@ export const ItemBlockWrapper = styled.div`
         font-size: 50px;
         z-index: 999999;
     }
-    .textWrapper {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        background-color: rgba(255,255,255,.5);
-        text-align: center;
-        padding: 10px;
-        .textTitle {
-            font-size: .825rem;
-            font-weight: 700;
-        }
-        .textDescription {
-            font-size: .7rem;
-            margin-top: 10px;
-        }
-    }
+    
 `;
 
 export const BackgroundImage = styled.div`
@@ -99,7 +84,7 @@ export const BackRowInnerWrap = styled.div`
 `;
 
 export const VerticalBackgroundImage = styled.span`
-    width: 100%;
+    width: 50%;
     height: 100%;
     position: relative;
     background-repeat: no-repeat;
@@ -107,6 +92,30 @@ export const VerticalBackgroundImage = styled.span`
     background-position: center;
     ${props => `background-image: url(${props.image})`}
 `;
+export const RowTextWrap = styled.span`
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    .textTitle {
+        font-size: .825rem;
+        font-weight: 700;
+    }
+    .textDescription {
+        font-size: .7rem;
+        margin-top: 10px;
+    }
+`;
+
+export const ButtonWrap = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    & button {
+        height: 45px;
+    }
+`
 
 export const IconAbsoulteTopRight = styled(FontAwesomeIcon)`
     position: absolute;

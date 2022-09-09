@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-// import './styles.scss';
+import { BasicButtons } from 'Atoms';
+
 import {
     ItemRowWrapper, 
     VerticalBackgroundImage,
     IconAbsoulteTopRight,
     PointsBottomRight,
     FrontRowInnerWrap,
-    BackRowInnerWrap
+    BackRowInnerWrap,
+    RowTextWrap,
+    ButtonWrap
 } from './styled';
 
 import {
@@ -14,6 +17,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export const RowBlock = ({
+    cardData,
     itemData,
     type,
 }) => {
@@ -35,6 +39,7 @@ export const RowBlock = ({
                     itemId: itemData["tradeId"] || itemData["completeId"],
                 }
             };
+    console.log('setUseItemData-->: ', setUseItemData)
 
     const FrontSide = ({useItemData}) => {
         const {
@@ -56,9 +61,15 @@ export const RowBlock = ({
                 <VerticalBackgroundImage image={image}>
                     <PointsBottomRight color={pointColor[taskItemId?.split('-')[0]] || "blue"}>{points}</PointsBottomRight>
                 </VerticalBackgroundImage>
-                <span className="textWrapper">
-                    <div className="textTitle">{itemName}</div>
-                    <div className="itemDescription">{itemDescription}</div>
+                <span>
+                    <RowTextWrap className="textWrapper">
+                        <div className="textTitle">{itemName}</div>
+                        <div className="itemDescription">{itemDescription}</div>
+                    </RowTextWrap>
+                    <ButtonWrap>
+                        <BasicButtons onClick={()=> console.log('reject')} color="error" label="Reject" />
+                        <BasicButtons onClick={()=> console.log("accept")} label="Accept" />
+                    </ButtonWrap>
                 </span>
             </FrontRowInnerWrap>
         )
