@@ -92,6 +92,11 @@ export const VerticalBackgroundImage = styled.span`
     background-position: center;
     ${props => `background-image: url(${props.image})`}
 `;
+
+export const RowTextBlock = styled.span`
+    width: 100%;
+`;
+
 export const RowTextWrap = styled.span`
     color: #fff;
     display: flex;

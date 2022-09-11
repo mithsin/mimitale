@@ -139,5 +139,6 @@ export const BackgroundImage = styled.div`
 export const SectionBodyWrap = styled.div`
     width: 100%;
     height: 450px;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 `

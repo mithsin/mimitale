@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { BasicButtons } from 'Atoms';
+import { updateCardInfo } from 'States/userSlice';
+import {
+    onClickAcceptTrade,
+    onClickAcceptCompleteQuest,
+    onClickRejectTrade,
+    onClickRejectComplete
+} from './events';
 
 import {
     ItemRowWrapper, 
@@ -8,6 +16,7 @@ import {
     PointsBottomRight,
     FrontRowInnerWrap,
     BackRowInnerWrap,
+    RowTextBlock,
     RowTextWrap,
     ButtonWrap
 } from './styled';
@@ -21,11 +30,10 @@ export const RowBlock = ({
     itemData,
     type,
 }) => {
+    const dispatch = useDispatch();
+    
     const [isFlip, setIsFlip] = useState(false);
-    const setUseItemData = 
-        type === "tradePending" 
-            ? itemData 
-            : {
+    const setUseItemData = {
                 ...itemData?.["tradeItem"],
                 ...itemData?.["completeItem"],
                 taskItemId: 
@@ -33,13 +41,31 @@ export const RowBlock = ({
                     itemData?.["completeItem"]?.["questItemId"] || 
                     "null",
                 itemObj: {
+                    type: itemData["type"],
                     status: itemData["status"],
                     activeDate: itemData["tradeDate"] || itemData["completeDate"],
-                    fullfilledDate: itemData["tradeDate"] || itemData["completeFulFillDate"],
+                    fulFilledDate: itemData["fulFilledDate"],
                     itemId: itemData["tradeId"] || itemData["completeId"],
                 }
             };
-    console.log('setUseItemData-->: ', setUseItemData)
+
+    const clickProps = {
+        type,
+        cardData,
+        itemData,
+        dispatch,
+        updateCardInfo
+    }
+
+    const onAcceptClick = () => {
+        if(type === "completePending") onClickAcceptCompleteQuest(clickProps);
+        if(type === "tradePending") onClickAcceptTrade(clickProps);
+    }
+
+    const onRejectClick = () => {
+        if(type === "completePending") onClickRejectComplete(clickProps);
+        if(type === "tradePending") onClickRejectTrade(clickProps);
+    }
 
     const FrontSide = ({useItemData}) => {
         const {
@@ -49,28 +75,29 @@ export const RowBlock = ({
             points,
             taskItemId,
         } = useItemData
-
+        
         const pointColor = {
             "shop": "#16bbbb",
             "quest": "#4c0303d1",
             "questItem": "#4c0303d1",
         }
-        // console.log('useItemData-->: ', useItemData)
+
         return (
             <FrontRowInnerWrap>
                 <VerticalBackgroundImage image={image}>
                     <PointsBottomRight color={pointColor[taskItemId?.split('-')[0]] || "blue"}>{points}</PointsBottomRight>
                 </VerticalBackgroundImage>
-                <span>
+                <RowTextBlock>
                     <RowTextWrap className="textWrapper">
                         <div className="textTitle">{itemName}</div>
                         <div className="itemDescription">{itemDescription}</div>
                     </RowTextWrap>
-                    <ButtonWrap>
-                        <BasicButtons onClick={()=> console.log('reject')} color="error" label="Reject" />
-                        <BasicButtons onClick={()=> console.log("accept")} label="Accept" />
-                    </ButtonWrap>
-                </span>
+                    {itemData["status"] === "pending" && 
+                        <ButtonWrap>
+                            <BasicButtons onClick={onRejectClick} color="error" label="Reject" />
+                            <BasicButtons onClick={onAcceptClick} label="Accept" />
+                        </ButtonWrap>}
+                </RowTextBlock>
             </FrontRowInnerWrap>
         )
     };
@@ -78,13 +105,13 @@ export const RowBlock = ({
     const BackSide = ({itemObj}) =>  {
         const {
             activeDate,
-            fullfilledDate,
+            fulFilledDate,
             status,
          } = itemObj;
         return (
             <BackRowInnerWrap>
                 <div>activeDate: {activeDate}</div>
-                <div>fullfilledDate: {fullfilledDate}</div>
+                <div>fulFilledDate: {fulFilledDate}</div>
                 <div>status: {status}</div>
             </BackRowInnerWrap>
         )
@@ -105,14 +132,3 @@ export const RowBlock = ({
 };
 
 export default RowBlock;
-
-// const convertedObj = {
-//     status: itemData["status"],
-//     activeDate: itemData["tradeDate" || "completeDate"],
-//     fullfilledDate: itemData["tradeDate" || "completeFulFillDate"],
-//     itemId: itemData["tradeId" || "completeId"],
-//     itemObj: {
-//         ...itemData["tradeItem" || "completeItem"],
-//         taskItemId: itemData["tradeItem"]["shopItemId"] || itemData["completeItem"]["questItemId"]
-//     }
-// };
