@@ -5,3 +5,4 @@ export * from './Models';
 export * from './AddNewItemBlock';
 export * from './ProfileImage';
 export * from './UserSwipBlock';
+export * from './PointsLayout';

@@ -3,7 +3,7 @@ import {
     SectionVerticalGridWrap,
     SectionGridWrap,
 } from './styled';
-import { ItemBlock, AddNewItemBlock, RowBlock } from 'Molecules';
+import { ItemBlock, AddNewItemBlock, RowBlock, PointsLayout } from 'Molecules';
 
 export const ShowLayoutType = ({type, list, cardData}) => {
     const showType = {
@@ -14,7 +14,7 @@ export const ShowLayoutType = ({type, list, cardData}) => {
         'tradePending': "row",
         'completePending': "row",
         'requestItem': "row",
-        'points': "custom",
+        'points': "pointLayout",
     }
 
     if(showType[type] === "tile"){
@@ -61,6 +61,12 @@ export const ShowLayoutType = ({type, list, cardData}) => {
                         : <p>{type}</p>
                 }
             </SectionVerticalGridWrap>
+        );
+    }
+
+    if(showType[type] === "pointLayout"){
+        return(
+            <PointsLayout cardData={cardData}/>
         );
     }
     return <p>{type}</p>;  

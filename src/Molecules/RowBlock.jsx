@@ -103,7 +103,7 @@ export const RowBlock = ({
     };
 
     const BackSide = ({itemObj}) =>  {
-        const {
+        const { 
             activeDate,
             fulFilledDate,
             status,
