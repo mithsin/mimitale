@@ -8,9 +8,9 @@ import {
     StarPointsType,
 } from './styled';
 
-export const StarsContainer = ({type, size="2x", StarPoints}) => (
+export const StarsContainer = ({color, type, size="2x", StarPoints}) => (
     <StarsBlock>
-        <FontAwesomeIconCont beat type={type} icon={faStar} size={size}/>
+        <FontAwesomeIconCont beat color={color} icon={faStar} size={size}/>
         {type && <StarPointsType className="starLabel">{type}</StarPointsType>}
         <StarPointsWrap>{StarPoints}</StarPointsWrap>
     </StarsBlock>

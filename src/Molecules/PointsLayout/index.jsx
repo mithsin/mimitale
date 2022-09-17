@@ -10,8 +10,8 @@ export const PointsLayout = ({ cardData, className, add }) => {
     const { CardId, points } = cardData;
     const [inputError, setInputError] = useState(false)
     const [inputValue, setInputValue] = useState('');
-    const pointValue = add ? [1, 5, 10, 20] : [-1, -5, -10, -20];
-
+    const positivePoints = [1, 5, 10, 20];
+    const negativePoints = [-1, -5, -10, -20];
     const onButtonClick = () => {
         const updatePoints = +points + parseInt(add ? inputValue : -inputValue)
         if(!inputError && updatePoints > -1){
@@ -52,11 +52,20 @@ export const PointsLayout = ({ cardData, className, add }) => {
     return (
         <PointsLayouterWrapper>
             <ul className="pointSysUl">
-                { pointValue.map( point =>
+                { positivePoints.map( point =>
                     <li key={point} className={className} onClick={()=> onPointsClick(point)}>
                         <StarsContainer
-                            classNameType={add ? 'reward' : 'trade'} 
-                            stars={ point } />
+                            color="green" 
+                            StarPoints={ point } />
+                    </li>)
+                }
+            </ul>
+            <ul className="pointSysUl">
+                { negativePoints.map( point =>
+                    <li key={point} className={className} onClick={()=> onPointsClick(point)}>
+                        <StarsContainer
+                            color="red" 
+                            StarPoints={ point } />
                     </li>)
                 }
             </ul>

@@ -18,13 +18,13 @@ export const StarPointsType = styled.div`
 `;
 export const FontAwesomeIconCont = styled(FontAwesomeIcon)`
     ${props => {
-        if (props.type === 'available') {
+        if (props.color === 'green') {
             return `color: rgb(23, 255, 2);`
         }
-        if (props.type === 'reward') {
+        if (props.color === 'yellow') {
             return `color: rgb(231, 231, 82);`
         }
-        if (props.type === 'traded') {
+        if (props.color === 'red') {
             return `color: rgb(204, 0, 0);`
         }
     }}

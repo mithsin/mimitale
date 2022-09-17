@@ -10,9 +10,9 @@ export const StarsSection = ({cardData}) => {
     return (
         <StarsSectionWrap>
             <NameBlock>{cardData.nickName}</NameBlock>
-            <StarsContainer type="available" StarPoints={cardData.points}/>
-            <StarsContainer type="reward" StarPoints={cardData.pendingRewardPoints}/>
-            <StarsContainer type="traded" StarPoints={cardData.pendingTradePoints}/>
+            <StarsContainer color="green" type="available" StarPoints={cardData.points}/>
+            <StarsContainer color="yellow" type="reward" StarPoints={cardData.pendingRewardPoints}/>
+            <StarsContainer color="red" type="traded" StarPoints={cardData.pendingTradePoints}/>
         </StarsSectionWrap>
     );
 }
