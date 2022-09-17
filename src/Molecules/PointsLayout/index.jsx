@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { updateCardInfo } from 'States/userSlice';
+// import { useDispatch } from 'react-redux';
+// import { updateCardInfo } from 'States/userSlice';
 import { StarsContainer } from 'Atoms';
 import { BasicButtons } from 'Atoms';
 import { PointsLayouterWrapper } from './styled';
 
 export const PointsLayout = ({ cardData, className, add }) => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const { CardId, points } = cardData;
     const [inputError, setInputError] = useState(false)
     const [inputValue, setInputValue] = useState('');
