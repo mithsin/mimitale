@@ -13,12 +13,9 @@ const CardLink = () => {
     useEffect(()=>{
         dispatch(getCardData(cardlink))
     },[])
-    console.log('cardlink-->: ', cardlink)
-    console.log('cardUseState-->: ', cardUseState)
+    
     return(
-        <div className='cardLinkWrapper'>
-            <Card userTypeGiver={false} cardData={cardUseState}/>
-        </div>
+        <Card userTypeGiver={false} cardData={cardUseState}/>
     );
 };
 

@@ -15,6 +15,7 @@ import { EditItemFrom } from "Components/Forms/EditItemFrom";
 
 export const ItemBlock = ({
     type,
+    userTypeGiver,
     itemData,
     cardData,
 }) => {
@@ -27,7 +28,9 @@ export const ItemBlock = ({
     const onEditClick = () => {
         setIsModelOpen(true);
     }
-   
+    const onGetClick = () => {
+        console.log('get click: ', type)
+    }
     return (
         <>
             <ItemBlockWrapper>
@@ -40,10 +43,16 @@ export const ItemBlock = ({
                 <div className="textWrapper">
                     <span className="textTitle">{itemName}</span>
                 </div>
-                <BasicButtons 
-                    label="EDIT"
-                    onClick={onEditClick}
-                />
+                {userTypeGiver 
+                    ? <BasicButtons 
+                        label="EDIT"
+                        onClick={onEditClick}
+                    />
+                    : <BasicButtons 
+                        label="GET"
+                        onClick={onGetClick}
+                    />
+                }
                 {isModelOpen && 
                     <EditItemFrom 
                         setIsModelOpen={setIsModelOpen}

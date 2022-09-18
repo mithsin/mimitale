@@ -5,7 +5,7 @@ import {
 } from './styled';
 import { ItemBlock, AddNewItemBlock, RowBlock, PointsLayout } from 'Molecules';
 
-export const ShowLayoutType = ({type, list, cardData}) => {
+export const ShowLayoutType = ({type, list, cardData, userTypeGiver}) => {
     const showType = {
         'shopItemList': "tile",
         'questItemList': "tile",
@@ -14,7 +14,7 @@ export const ShowLayoutType = ({type, list, cardData}) => {
         'tradePending': "row",
         'completePending': "row",
         'requestItem': "row",
-        'points': "pointLayout",
+        ...(userTypeGiver && {'points': "pointLayout"})
     }
 
     if(showType[type] === "tile"){
@@ -27,6 +27,7 @@ export const ShowLayoutType = ({type, list, cardData}) => {
                                 return(
                                     <ItemBlock 
                                         key={'itemblock-' + index}
+                                        userTypeGiver={userTypeGiver}
                                         cardData={cardData}
                                         itemData={item} 
                                         type={type}/>
@@ -53,6 +54,7 @@ export const ShowLayoutType = ({type, list, cardData}) => {
                                 return(
                                     <RowBlock
                                         key={'RowBlock-' + index}
+                                        userTypeGiver={userTypeGiver}
                                         cardData={cardData}
                                         itemData={item} 
                                         type={type}/>
@@ -66,7 +68,7 @@ export const ShowLayoutType = ({type, list, cardData}) => {
 
     if(showType[type] === "pointLayout"){
         return(
-            <PointsLayout cardData={cardData}/>
+            <PointsLayout cardData={cardData} />
         );
     }
     return <p>{type}</p>;  

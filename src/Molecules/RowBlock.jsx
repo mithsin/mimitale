@@ -27,6 +27,7 @@ import {
 
 export const RowBlock = ({
     cardData,
+    userTypeGiver,
     itemData,
     type,
 }) => {
@@ -67,6 +68,10 @@ export const RowBlock = ({
         if(type === "tradePending") onClickRejectTrade(clickProps);
     }
 
+    const onCancelClick = () => {
+        console.log('cancel clicked')
+    }
+
     const FrontSide = ({useItemData}) => {
         const {
             image,
@@ -93,10 +98,15 @@ export const RowBlock = ({
                         <div className="itemDescription">{itemDescription}</div>
                     </RowTextWrap>
                     {itemData["status"] === "pending" && 
-                        <ButtonWrap>
-                            <BasicButtons onClick={onRejectClick} color="error" label="Reject" />
-                            <BasicButtons onClick={onAcceptClick} label="Accept" />
-                        </ButtonWrap>}
+                        (userTypeGiver 
+                            ? (<ButtonWrap>
+                                    <BasicButtons onClick={onRejectClick} color="error" label="Reject" />
+                                    <BasicButtons onClick={onAcceptClick} label="Accept" />
+                                </ButtonWrap>)
+                            : <BasicButtons 
+                                label="Cancel"
+                                onClick={onCancelClick} />
+                    )}
                 </RowTextBlock>
             </FrontRowInnerWrap>
         )
