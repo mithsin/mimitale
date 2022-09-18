@@ -5,12 +5,12 @@ import Switch from '@mui/material/Switch';
 
 import { StarsContainer } from 'Atoms';
 import { BasicButtons } from 'Atoms';
-import { PointsLayouterWrapper, QuicPointskWrapper,  } from './styled';
+import { PointsLayouterWrapper, QuicPointskWrapper, PointSysUl, PointStarCtn } from './styled';
 
 export const PointsLayout = ({ cardData, className }) => {
     // const dispatch = useDispatch();
     const { CardId, points } = cardData;
-    const { isAdd, setIsAdd } = useState(true);
+    const [ isAdd, setIsAdd ] = useState(true);
     const [inputError, setInputError] = useState(false)
     const [inputValue, setInputValue] = useState('');
     const positivePoints = [1, 5, 10, 20];
@@ -29,21 +29,9 @@ export const PointsLayout = ({ cardData, className }) => {
             console.log('something is not right in input')
         }
     };
-
-    const onAddPointsClick = (fastPoint) => {
+    
+    const onFastPointsClick = (fastPoint) => {
         const updatePoints = +points + parseInt(fastPoint)
-        if(!inputError && updatePoints > -1){
-            const params = {
-                CardId: CardId,
-                points: updatePoints
-            };
-            console.log("onPointsClick-params--->: ", params)
-            // dispatch(updateCardInfo(params))
-        }
-    };
-
-    const onMinusPointsClick = (fastPoint) => {
-        const updatePoints = +points - parseInt(fastPoint)
         if(!inputError && updatePoints > -1){
             const params = {
                 CardId: CardId,
@@ -65,27 +53,27 @@ export const PointsLayout = ({ cardData, className }) => {
     };
 
     const onClickIsAdd = () => setIsAdd(!isAdd);
-
+    console.log('isadd? ', isAdd)
 
     return (
         <PointsLayouterWrapper>
             <QuicPointskWrapper>
                 <PointSysUl>
                     { positivePoints.map( point =>
-                        <li key={point} className={className} onClick={()=> onAddPointsClick(point)}>
+                        <PointStarCtn key={point} isAdd={true} onClick={()=> onFastPointsClick(point)}>
                             <StarsContainer
                                 color="green" 
                                 StarPoints={ point } />
-                        </li>)
+                        </PointStarCtn>)
                     }
                 </PointSysUl>
                 <PointSysUl>
                     { negativePoints.map( point =>
-                        <li key={point} className={className} onClick={()=> onMinusPointsClick(point)}>
+                        <PointStarCtn key={point} isAdd={false} onClick={()=> onFastPointsClick(point)}>
                             <StarsContainer
                                 color="red" 
                                 StarPoints={ point } />
-                        </li>)
+                        </PointStarCtn>)
                     }
                 </PointSysUl>
             </QuicPointskWrapper>
@@ -94,11 +82,11 @@ export const PointsLayout = ({ cardData, className }) => {
                     <Switch 
                         label='url-input' 
                         defaultChecked 
-                        checked={!isImageURLDrop}
+                        checked={!isAdd}
                         onChange={onClickIsAdd}
                         inputProps={{ 'aria-label': 'controlled' }}
                         />
-                    points format
+                    {isAdd ? 'add points' : 'minus points'}
                 </div>
             <input 
                 className={inputError ? 'inputError' : 'pointInput'} 

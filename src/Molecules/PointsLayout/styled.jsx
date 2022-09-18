@@ -29,16 +29,16 @@ export const QuicPointskWrapper = styled.div`
 
 `;
 
-export const PointSysUl = styled.ul`
+export const PointSysUl = styled.span`
     display: flex;
     flex-wrap: wrap;
     flex: 1;
     padding: 0px;
     width: 100%;
-    li.addPoint {
+    li {
         padding: 15px;
         flex: 1;
-        .StarsContainerWrapper {
+        & StarsContainer {
             text-align: center;
             cursor: pointer;
             &:hover {
@@ -51,10 +51,10 @@ export const PointSysUl = styled.ul`
             }
         }
     }
-    li.minusPoint {
+    li {
         padding: 15px;
         flex: 1;
-        .StarsContainerWrapper {
+        & StarsContainer {
             text-align: center;
             cursor: pointer;
             &:hover {
@@ -67,4 +67,20 @@ export const PointSysUl = styled.ul`
             }
         }
     }
+`;
+
+export const PointStarCtn = styled.span`
+    text-align: center;
+    cursor: pointer;
+        &:hover {
+            ${props => `
+                svg {
+                    color: ${props.isAdd ? '#0d3a25' : '#812323;'};
+                }
+                .numberStars{
+                    color: ${props.isAdd ? '#33da8c' : '#f84a4a;'};
+                }
+            `}
+
+        }
 `;
