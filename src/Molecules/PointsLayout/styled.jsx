@@ -31,42 +31,8 @@ export const QuicPointskWrapper = styled.div`
 
 export const PointSysUl = styled.span`
     display: flex;
-    flex-wrap: wrap;
-    flex: 1;
-    padding: 0px;
+    justify-content: space-around;
     width: 100%;
-    li {
-        padding: 15px;
-        flex: 1;
-        & StarsContainer {
-            text-align: center;
-            cursor: pointer;
-            &:hover {
-                svg {
-                    color: #0d3a25;
-                }
-                .numberStars{
-                    color: #33da8c;
-                }
-            }
-        }
-    }
-    li {
-        padding: 15px;
-        flex: 1;
-        & StarsContainer {
-            text-align: center;
-            cursor: pointer;
-            &:hover {
-                svg {
-                    color: #812323;
-                }
-                .numberStars{
-                    color: #f84a4a;
-                }
-            }
-        }
-    }
 `;
 
 export const PointStarCtn = styled.span`
@@ -83,4 +49,23 @@ export const PointStarCtn = styled.span`
             `}
 
         }
+`;
+
+export const ButtonWrap = styled.div`
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    margin: 0 0.5rem;
+    button {
+        width: 150px;
+        padding: 1rem;
+        margin: 0;
+        &:hover {
+            ${props => `
+                background-color: ${props.isAdd ? '#0d3a25' : '#812323;'};
+            `}
+
+        }
+    }
+
 `;

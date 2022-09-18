@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { updateCardInfo } from 'States/userSlice';
+import { useDispatch } from 'react-redux';
+import { updateCardInfo } from 'States/userSlice';
 import Switch from '@mui/material/Switch';
 
 import { StarsContainer } from 'Atoms';
 import { BasicButtons } from 'Atoms';
-import { PointsLayouterWrapper, QuicPointskWrapper, PointSysUl, PointStarCtn } from './styled';
+import { PointsLayouterWrapper, QuicPointskWrapper, PointSysUl, PointStarCtn, ButtonWrap } from './styled';
 
 export const PointsLayout = ({ cardData, className }) => {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const { CardId, points } = cardData;
     const [ isAdd, setIsAdd ] = useState(true);
     const [inputError, setInputError] = useState(false)
@@ -22,8 +22,8 @@ export const PointsLayout = ({ cardData, className }) => {
                 CardId: CardId,
                 points: updatePoints
             };
-            console.log("onButtonClick-params--->: ", params)
-            // dispatch(updateCardInfo(params))
+            // console.log("onButtonClick-params--->: ", params)
+            dispatch(updateCardInfo(params))
             setInputValue('')
         } else {
             console.log('something is not right in input')
@@ -37,8 +37,8 @@ export const PointsLayout = ({ cardData, className }) => {
                 CardId: CardId,
                 points: updatePoints
             };
-            console.log("onPointsClick-params--->: ", params)
-            // dispatch(updateCardInfo(params))
+            // console.log("onPointsClick-params--->: ", params)
+            dispatch(updateCardInfo(params))
         }
     };
 
@@ -53,7 +53,6 @@ export const PointsLayout = ({ cardData, className }) => {
     };
 
     const onClickIsAdd = () => setIsAdd(!isAdd);
-    console.log('isadd? ', isAdd)
 
     return (
         <PointsLayouterWrapper>
@@ -78,26 +77,32 @@ export const PointsLayout = ({ cardData, className }) => {
                 </PointSysUl>
             </QuicPointskWrapper>
             {inputError && <span>NUMBER ONLY</span>}
-                <div>
-                    <Switch 
-                        label='url-input' 
-                        defaultChecked 
-                        checked={!isAdd}
-                        onChange={onClickIsAdd}
-                        inputProps={{ 'aria-label': 'controlled' }}
-                        />
-                    {isAdd ? 'add points' : 'minus points'}
-                </div>
+                
             <input 
                 className={inputError ? 'inputError' : 'pointInput'} 
                 value={inputValue} 
                 type='text' 
                 placeholder="points" 
                 onChange={onInputChange}/>
-            <BasicButtons
-                onClick={onButtonClick}
-                label={isAdd ? 'ADD' : 'MINUS'}
-                className="pointButton" />
+            <ButtonWrap>
+                <BasicButtons
+                    onClick={onButtonClick}
+                    classColor={isAdd ? 'green' : 'red'}
+                    label={isAdd ? 'ADD' : 'MINUS'}
+                    isAdd={isAdd}
+                    className="pointButton" />
+                <div>
+                    Add
+                    <Switch 
+                        label='url-input' 
+                        defaultChecked 
+                        color="error"
+                        checked={!isAdd}
+                        onChange={onClickIsAdd}
+                        inputProps={{ 'aria-label': 'controlled' }} /> 
+                    Minus
+                </div>
+            </ButtonWrap>    
         </PointsLayouterWrapper>
     );
 };
