@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { v4 as uuidv4 } from 'uuid';
 
 export const onClickAcceptTrade =({
     type,
@@ -115,3 +116,26 @@ export const onClickRejectComplete =({
     console.log("pedingList-Params-onClickRejectComplete ---->: ", params)
     // dispatch(updateCardInfo(params))
 };
+
+export const onBuyClick = ({
+    type,
+    cardData,
+    itemData,//trade, complete
+    dispatch,
+    updateCardInfo
+}) => {
+
+    const params = {
+        CardId: cardData.link,
+        pendingRewardPoints: cardData.pendingRewardPoints + itemData.points,
+        completePending: cardData.completePending.concat([{
+            itemId: `${type}-${uuidv4()}`,
+            status: "pending",
+            activeDate: moment().format("YYYY-MM-DD"),
+            fulFilledDate: "none",
+            itemData: itemData
+        }])
+    }
+    console.log("onBuyClick-params--->: ", params)
+    // dispatch(updateCardInfo(params))
+}

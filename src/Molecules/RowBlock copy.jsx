@@ -32,8 +32,23 @@ export const RowBlock = ({
     type,
 }) => {
     const dispatch = useDispatch();
+    
     const [isFlip, setIsFlip] = useState(false);
-    const setUseItemData = {};
+    const setUseItemData = {
+                ...itemData?.["tradeItem"],
+                ...itemData?.["completeItem"],
+                taskItemId: 
+                    itemData?.["tradeItem"]?.["shopItemId"] || 
+                    itemData?.["completeItem"]?.["questItemId"] || 
+                    "null",
+                itemObj: {
+                    type: itemData["type"],
+                    status: itemData["status"],
+                    activeDate: itemData["tradeDate"] || itemData["completeDate"],
+                    fulFilledDate: itemData["fulFilledDate"],
+                    itemId: itemData["tradeId"] || itemData["completeId"],
+                }
+            };
 
     const clickProps = {
         type,
@@ -63,7 +78,7 @@ export const RowBlock = ({
             itemDescription,
             itemName,
             points,
-            itemId,
+            taskItemId,
         } = useItemData
         
         const pointColor = {
@@ -75,7 +90,7 @@ export const RowBlock = ({
         return (
             <FrontRowInnerWrap>
                 <VerticalBackgroundImage image={image}>
-                    <PointsBottomRight color={pointColor[itemId?.split('-')[0]] || "blue"}>{points}</PointsBottomRight>
+                    <PointsBottomRight color={pointColor[taskItemId?.split('-')[0]] || "blue"}>{points}</PointsBottomRight>
                 </VerticalBackgroundImage>
                 <RowTextBlock>
                     <RowTextWrap className="textWrapper">
@@ -120,7 +135,7 @@ export const RowBlock = ({
             }
             { isFlip
                 ? <BackSide itemObj={setUseItemData?.itemObj}/>
-                : <FrontSide useItemData={itemData}/>
+                : <FrontSide useItemData={setUseItemData}/>
             }
         </ItemRowWrapper>
     );

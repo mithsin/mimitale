@@ -5,13 +5,13 @@ import { Button } from '@mui/material';
 export const CognitoButton = styled(Button)`
     margin-bottom: 1rem;
     ${props => {
-        if (props.classColor === 'green') {
+        if (props.classcolor === 'green') {
             return `background-color: rgb(23, 255, 2);`
         }
-        if (props.classColor === 'yellow') {
+        if (props.classcolor === 'yellow') {
             return `background-color: rgb(231, 231, 82);`
         }
-        if (props.classColor === 'red') {
+        if (props.classcolor === 'red') {
             return `background-color: rgb(204, 0, 0);`
         }
     }}
@@ -21,13 +21,13 @@ export const BasicButtonWrap = styled(Button)`
     margin: 1rem 0;
     padding: .5rem 0;
     ${props => {
-        if (props.classColor === 'green') {
+        if (props.classcolor === 'green') {
             return `background-color: #389930;`
         }
-        if (props.classColor === 'yellow') {
+        if (props.classcolor === 'yellow') {
             return `background-color: rgb(231, 231, 82);`
         }
-        if (props.classColor === 'red') {
+        if (props.classcolor === 'red') {
             return `background-color: rgb(204, 0, 0);`
         }
     }}
@@ -36,7 +36,7 @@ export const BasicButtonWrap = styled(Button)`
 // color: success, error, 
 
 export const BasicButtons = ({
-    classColor, //green, yellow, red
+    classcolor, //green, yellow, red
     color,
     label,
     size="large", //small, medium, large
@@ -53,7 +53,7 @@ export const BasicButtons = ({
             startIcon={startIcon}
             endIcon={endIcon}
             color={color}
-            classColor={classColor}
+            classcolor={classcolor}
             onClick={onClick}>
                 {label}
         </BasicButtonWrap>

@@ -20,3 +20,8 @@ export const ListWrap = styled.div`
     justify-content: center;
     gap: 1em;
 `;
+
+export const CardLinkWrap = styled.div`
+    display: flex;
+    justify-content: center;
+`;

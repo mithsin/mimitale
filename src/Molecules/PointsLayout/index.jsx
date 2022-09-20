@@ -87,7 +87,7 @@ export const PointsLayout = ({ cardData, className }) => {
             <ButtonWrap>
                 <BasicButtons
                     onClick={onButtonClick}
-                    classColor={isAdd ? 'green' : 'red'}
+                    classcolor={isAdd ? 'green' : 'red'}
                     label={isAdd ? 'ADD' : 'MINUS'}
                     isAdd={isAdd}
                     className="pointButton" />

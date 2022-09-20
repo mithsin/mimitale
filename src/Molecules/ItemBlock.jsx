@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { BasicButtons } from 'Atoms';
+import { updateCardInfo } from 'States/userSlice';
 import {
     ItemBlockWrapper, 
     BackgroundImage,
@@ -11,7 +13,12 @@ import {
     faCircleInfo
 } from '@fortawesome/free-solid-svg-icons';
 
+import { showTypeText } from "utils/type";
 import { EditItemFrom } from "Components/Forms/EditItemFrom";
+
+import {
+    onBuyClick
+} from './events';
 
 export const ItemBlock = ({
     type,
@@ -24,13 +31,24 @@ export const ItemBlock = ({
         itemName,
         itemDescription
     } = itemData;
+    const dispatch = useDispatch();
     const [isModelOpen, setIsModelOpen] = useState(false)
+    const clickProps = {
+        type,
+        cardData,
+        itemData,
+        dispatch,
+        updateCardInfo
+    }
+
     const onEditClick = () => {
         setIsModelOpen(true);
     }
+
     const onGetClick = () => {
-        console.log('get click: ', type)
+        onBuyClick(clickProps)
     }
+
     return (
         <>
             <ItemBlockWrapper>
@@ -49,7 +67,7 @@ export const ItemBlock = ({
                         onClick={onEditClick}
                     />
                     : <BasicButtons 
-                        label="GET"
+                        label={showTypeText[type]}
                         onClick={onGetClick}
                     />
                 }

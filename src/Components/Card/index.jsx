@@ -19,7 +19,7 @@ export const Card = ({userTypeGiver=true}) => {
         cardData,
         userTypeGiver
     }
-    
+
     return(
         <CardOutterWrap>
             {openCardSetting && 

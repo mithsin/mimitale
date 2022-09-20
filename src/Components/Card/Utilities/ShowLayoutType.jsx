@@ -1,4 +1,5 @@
 import React from 'react';
+import { showDisplayType } from 'utils/type';
 import { 
     SectionVerticalGridWrap,
     SectionGridWrap,
@@ -6,16 +7,7 @@ import {
 import { ItemBlock, AddNewItemBlock, RowBlock, PointsLayout } from 'Molecules';
 
 export const ShowLayoutType = ({type, list, cardData, userTypeGiver}) => {
-    const showType = {
-        'shopItemList': "tile",
-        'questItemList': "tile",
-        'dailyQuestItemList': "tile",
-        'historyList': "row",
-        'tradePending': "row",
-        'completePending': "row",
-        'requestItem': "row",
-        ...(userTypeGiver && {'points': "pointLayout"})
-    }
+    const showType = showDisplayType(userTypeGiver)
 
     if(showType[type] === "tile"){
         return (
