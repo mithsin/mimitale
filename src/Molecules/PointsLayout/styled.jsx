@@ -21,43 +21,51 @@ export const PointsLayouterWrapper = styled.div`
     .pointButton{
         padding: 10px 0;
     }
-    .pointSysUl {
-        display: flex;
-        flex-wrap: wrap;
-        flex: 1;
-        padding: 0px;
-        width: 100%;
-        li.addPoint {
-            padding: 15px;
-            flex: 1;
-            .StarsContainerWrapper {
-                text-align: center;
-                cursor: pointer;
-                &:hover {
-                    svg {
-                        color: #0d3a25;
-                    }
-                    .numberStars{
-                        color: #33da8c;
-                    }
+`;
+
+export const QuicPointskWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+
+`;
+
+export const PointSysUl = styled.span`
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+`;
+
+export const PointStarCtn = styled.span`
+    text-align: center;
+    cursor: pointer;
+        &:hover {
+            ${props => `
+                svg {
+                    color: ${props.isAdd ? '#0d3a25' : '#812323;'};
                 }
-            }
+                .numberStars{
+                    color: ${props.isAdd ? '#33da8c' : '#f84a4a;'};
+                }
+            `}
+
         }
-        li.minusPoint {
-            padding: 15px;
-            flex: 1;
-            .StarsContainerWrapper {
-                text-align: center;
-                cursor: pointer;
-                &:hover {
-                    svg {
-                        color: #812323;
-                    }
-                    .numberStars{
-                        color: #f84a4a;
-                    }
-                }
-            }
+`;
+
+export const ButtonWrap = styled.div`
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    margin: 0 0.5rem;
+    button {
+        width: 150px;
+        padding: 1rem;
+        margin: 0;
+        &:hover {
+            ${props => `
+                background-color: ${props.isAdd ? '#0d3a25' : '#812323;'};
+            `}
+
         }
     }
+
 `;

@@ -118,7 +118,9 @@ export const ButtonWrap = styled.div`
     display: flex;
     justify-content: flex-end;
     & button {
-        height: 45px;
+        height: 45px;       
+        margin: 0 0.3rem;
+        padding: 0 0.5rem;
     }
 `
 

@@ -1,21 +1,13 @@
 import React from 'react';
+import { showDisplayType } from 'utils/type';
 import { 
     SectionVerticalGridWrap,
     SectionGridWrap,
 } from './styled';
 import { ItemBlock, AddNewItemBlock, RowBlock, PointsLayout } from 'Molecules';
 
-export const ShowLayoutType = ({type, list, cardData}) => {
-    const showType = {
-        'shopItemList': "tile",
-        'questItemList': "tile",
-        'dailyQuestItemList': "tile",
-        'historyList': "row",
-        'tradePending': "row",
-        'completePending': "row",
-        'requestItem': "row",
-        'points': "pointLayout",
-    }
+export const ShowLayoutType = ({type, list, cardData, userTypeGiver}) => {
+    const showType = showDisplayType(userTypeGiver)
 
     if(showType[type] === "tile"){
         return (
@@ -27,6 +19,7 @@ export const ShowLayoutType = ({type, list, cardData}) => {
                                 return(
                                     <ItemBlock 
                                         key={'itemblock-' + index}
+                                        userTypeGiver={userTypeGiver}
                                         cardData={cardData}
                                         itemData={item} 
                                         type={type}/>
@@ -53,6 +46,7 @@ export const ShowLayoutType = ({type, list, cardData}) => {
                                 return(
                                     <RowBlock
                                         key={'RowBlock-' + index}
+                                        userTypeGiver={userTypeGiver}
                                         cardData={cardData}
                                         itemData={item} 
                                         type={type}/>
@@ -66,7 +60,7 @@ export const ShowLayoutType = ({type, list, cardData}) => {
 
     if(showType[type] === "pointLayout"){
         return(
-            <PointsLayout cardData={cardData}/>
+            <PointsLayout cardData={cardData} />
         );
     }
     return <p>{type}</p>;  

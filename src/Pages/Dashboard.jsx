@@ -29,7 +29,7 @@ const Dashboard = () => {
         <ListSection>
             <span>GIVING LIST</span>
             <ListWrap className='cardListCtn'>
-                {!openNewCardForm && <Card/>}
+                {!openNewCardForm && <Card userTypeGiver={true}/>}
             </ListWrap>
         </ListSection>
 

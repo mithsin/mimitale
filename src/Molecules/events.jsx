@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { v4 as uuidv4 } from 'uuid';
 
 export const onClickAcceptTrade =({
     type,
@@ -31,8 +32,8 @@ export const onClickAcceptTrade =({
         tradePending: updatePendingList,
         historyList: historyList ? [...historyList, pendingToHistory] : [pendingToHistory]
     }
-    // console.log("pedingList-Params-onClickAcceptTrade ---->: ", params)
-    dispatch(updateCardInfo(params))
+    console.log("pedingList-Params-onClickAcceptTrade ---->: ", params)
+    // dispatch(updateCardInfo(params))
 };
 export const onClickAcceptCompleteQuest =({
     type,
@@ -64,8 +65,8 @@ export const onClickAcceptCompleteQuest =({
         completePending: updatePendingList,
         historyList: historyList ? [...historyList, pendingToHistory] : [pendingToHistory]
     }
-    // console.log("pedingList-Params-onClickAcceptCompleteQuest ---->: ", params)
-    dispatch(updateCardInfo(params))
+    console.log("pedingList-Params-onClickAcceptCompleteQuest ---->: ", params)
+    // dispatch(updateCardInfo(params))
 };
 export const onClickRejectTrade =({
     type,
@@ -88,8 +89,8 @@ export const onClickRejectTrade =({
         pendingTradePoints: pendingTradePoints - itemData.points,
         tradePending: updatePendingList
     }
-    // console.log("pedingList-Params-onClickRejectTrade ---->: ", params)
-    dispatch(updateCardInfo(params))
+    console.log("pedingList-Params-onClickRejectTrade ---->: ", params)
+    // dispatch(updateCardInfo(params))
 };
 export const onClickRejectComplete =({
     type,
@@ -112,6 +113,29 @@ export const onClickRejectComplete =({
         pendingRewardPoints: pendingRewardPoints - itemData.points,
         completePending: updatePendingList
     }
-    // console.log("pedingList-Params-onClickRejectComplete ---->: ", params)
-    dispatch(updateCardInfo(params))
+    console.log("pedingList-Params-onClickRejectComplete ---->: ", params)
+    // dispatch(updateCardInfo(params))
 };
+
+export const onBuyClick = ({
+    type,
+    cardData,
+    itemData,//trade, complete
+    dispatch,
+    updateCardInfo
+}) => {
+
+    const params = {
+        CardId: cardData.link,
+        pendingRewardPoints: cardData.pendingRewardPoints + itemData.points,
+        completePending: cardData.completePending.concat([{
+            itemId: `${type}-${uuidv4()}`,
+            status: "pending",
+            activeDate: moment().format("YYYY-MM-DD"),
+            fulFilledDate: "none",
+            itemData: itemData
+        }])
+    }
+    console.log("onBuyClick-params--->: ", params)
+    // dispatch(updateCardInfo(params))
+}

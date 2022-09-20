@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { BasicButtons } from 'Atoms';
+import { updateCardInfo } from 'States/userSlice';
 import {
     ItemBlockWrapper, 
     BackgroundImage,
@@ -11,10 +13,16 @@ import {
     faCircleInfo
 } from '@fortawesome/free-solid-svg-icons';
 
+import { showTypeText } from "utils/type";
 import { EditItemFrom } from "Components/Forms/EditItemFrom";
+
+import {
+    onBuyClick
+} from './events';
 
 export const ItemBlock = ({
     type,
+    userTypeGiver,
     itemData,
     cardData,
 }) => {
@@ -23,11 +31,24 @@ export const ItemBlock = ({
         itemName,
         itemDescription
     } = itemData;
+    const dispatch = useDispatch();
     const [isModelOpen, setIsModelOpen] = useState(false)
+    const clickProps = {
+        type,
+        cardData,
+        itemData,
+        dispatch,
+        updateCardInfo
+    }
+
     const onEditClick = () => {
         setIsModelOpen(true);
     }
-   
+
+    const onGetClick = () => {
+        onBuyClick(clickProps)
+    }
+
     return (
         <>
             <ItemBlockWrapper>
@@ -40,10 +61,16 @@ export const ItemBlock = ({
                 <div className="textWrapper">
                     <span className="textTitle">{itemName}</span>
                 </div>
-                <BasicButtons 
-                    label="EDIT"
-                    onClick={onEditClick}
-                />
+                {userTypeGiver 
+                    ? <BasicButtons 
+                        label="EDIT"
+                        onClick={onEditClick}
+                    />
+                    : <BasicButtons 
+                        label={showTypeText[type]}
+                        onClick={onGetClick}
+                    />
+                }
                 {isModelOpen && 
                     <EditItemFrom 
                         setIsModelOpen={setIsModelOpen}

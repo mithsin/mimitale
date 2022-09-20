@@ -9,8 +9,15 @@ import {
 
 export const OptionsSwipe = (props) => {
     const {
-        setSelectedSection
+        setSelectedSection,
+        userTypeGiver
     } = props;
+
+    const filterList = (
+      userTypeGiver
+        ? staticOptionList
+        : staticOptionList.filter(item => !item.giverOnly)
+    )
 
     const WrapCont = ({slide}) => {
         return (
@@ -26,7 +33,7 @@ export const OptionsSwipe = (props) => {
             <SwipComponent 
                 slidesPerview="auto"
                 WrapCont={WrapCont}
-                slideList={staticOptionList}/>
+                slideList={filterList}/>
         </SlideWrapper>
     );
 }

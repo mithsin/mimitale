@@ -9,16 +9,17 @@ import { CardSetting } from './Utilities/CardSetting';
 import { staticOptionList } from './Utilities/support';
 
 
-export const Card = () => {
+export const Card = ({userTypeGiver=true}) => {
     const cardData = useSelector(useFullCardData);
     const [openCardSetting, setOpenCardSetting] = useState(false);
     const [selectedSection, setSelectedSection] = useState(staticOptionList[0]['dataListName']);
     const propsList = {
         selectedSection,
         setSelectedSection,
-        cardData
+        cardData,
+        userTypeGiver
     }
-    
+
     return(
         <CardOutterWrap>
             {openCardSetting && 

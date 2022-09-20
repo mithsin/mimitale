@@ -1,6 +1,7 @@
 // eslint-disable-line react-hooks/exhaustive-deps
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { showTitle } from 'utils/type';
 import { 
     usePendingRewardPoints,
     usePendingTradePoints,
@@ -35,7 +36,8 @@ export const SelectedSectionLayout = (props) => {
     const [selectList, setSelectList] = useState([])
     const {
         selectedSection,
-        cardData
+        cardData,
+        userTypeGiver
     } = props;
     useEffect(()=>{
         setSelectList(cardData[selectedSection])
@@ -55,17 +57,6 @@ export const SelectedSectionLayout = (props) => {
         getTradePending
     ]);
     
-    const showTitle = {
-        'shopItemList': "Shop Item",
-        'questItemList': "Quest Item",
-        'dailyQuestItemList': "Daily Quest Item",
-        'historyList': "History",
-        'tradePending': "Pending trade",
-        'completePending': "Pending Complete",
-        'requestItem': "Request Item",
-        'points': "Points",
-    }
-
     return (
         <SelectedSectionWrapper>
             <UpperH3>{showTitle[selectedSection]}</UpperH3>
@@ -74,6 +65,7 @@ export const SelectedSectionLayout = (props) => {
                     type={selectedSection}
                     list={selectList}
                     cardData={cardData}
+                    userTypeGiver={userTypeGiver}
                 />
             </SectionBodyWrap>
         </SelectedSectionWrapper>
