@@ -14,7 +14,7 @@ const CardLink = () => {
     const {cardlink} = useParams();
     useEffect(()=>{
         dispatch(getCardData(cardlink))
-    },[getCardData, dispatch])
+    },[cardlink, dispatch])
     
     return(
         <CardLinkWrap>
