@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { InputStandard, RadioButtonsGroup, BasicButtons } from 'Atoms';
 import { ImageUpload } from 'Components/ImageUpload/ImageUpload';
 import { ButtonWrap, UploadImageWrap, ImageWrap } from './styled';
+import Switch from '@mui/material/Switch';
 
 export const FormFormat = ({
     defaultFormat,
@@ -15,7 +16,9 @@ export const FormFormat = ({
     const [useInputSetting, setUseInputSetting] = useState(inputSettings)
     const [imageURL, setImageURL] = useState(defaultFormat.image || '');
     const [inputError, setInputError] = useState()
+    const [isImageURLDrop, setIsImageURLDrop] = useState(true);
     const clearInput = Object.assign(inputSettings);
+
     useEffect(()=>{
         imageURL && setFormInputs({
             ...formInputs,
@@ -51,13 +54,28 @@ export const FormFormat = ({
         }
     }
 
+    const onImageToggleClick = () => setIsImageURLDrop(!isImageURLDrop);
+
     return (
         <div>
-            {   isUploadImageAvailable &&
+            { isUploadImageAvailable &&
                     <div>
                         Upload Profile Image
+                        <div>
+                            <Switch 
+                                label='url-input' 
+                                defaultChecked 
+                                checked={!isImageURLDrop}
+                                onChange={onImageToggleClick}
+                                inputProps={{ 'aria-label': 'controlled' }}
+                                />
+                            input url or upload file?
+                        </div>
                         <UploadImageWrap>
-                            <ImageUpload setImageURL={setImageURL}/>
+                            { isImageURLDrop
+                                ? <ImageUpload setImageURL={setImageURL}/>
+                                : <InputStandard name="image" label="image url" onChange={formInputChange} />
+                            }
                             <ImageWrap>
                                 <img src={imageURL} alt="upload-preview" />
                             </ImageWrap>

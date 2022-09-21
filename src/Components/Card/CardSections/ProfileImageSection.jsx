@@ -10,7 +10,7 @@ import {
     ImageContainer, 
 } from './styled';
 
-export const ProfileImageSection = ({cardData, setOpenCardSetting}) => {
+export const ProfileImageSection = ({cardData, setOpenCardSetting, userTypeGiver}) => {
     const { profileImage, receiverGender, nickName } = cardData;
     const girlAnimateImg = "https://cdna.artstation.com/p/assets/images/images/001/690/356/medium/jay-choi-19.jpg?1450951074";
     const boyAnimateImg = "https://i.pinimg.com/736x/20/35/76/203576cfc2b68dc061360f47602ba06d.jpg";
@@ -20,9 +20,11 @@ export const ProfileImageSection = ({cardData, setOpenCardSetting}) => {
         setOpenCardSetting(true)};
     return (
         <ImageContainer>
-            <ImageContWrap  onClick={onOpenCardSettingClick}>
-                <FontAwesomeIcon icon={faEllipsisVertical}/>
-            </ImageContWrap>
+            {userTypeGiver && 
+                <ImageContWrap  onClick={onOpenCardSettingClick}>
+                    <FontAwesomeIcon icon={faEllipsisVertical}/>
+                </ImageContWrap>
+            }
             {
                 (profileImage && <img src={profileImage} alt={nickName} />) ||
                 ((receiverGender === "F") && <img src={girlAnimateImg} alt="Girl-animate" />) ||

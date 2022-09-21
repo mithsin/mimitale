@@ -28,12 +28,12 @@ export const onClickAcceptTrade =({
     const params={
         CardId: CardId,
         points: points,
-        pendingTradePoints: pendingTradePoints - itemData.points,
+        pendingTradePoints: pendingTradePoints - itemData.itemData.points,
         tradePending: updatePendingList,
         historyList: historyList ? [...historyList, pendingToHistory] : [pendingToHistory]
     }
-    console.log("pedingList-Params-onClickAcceptTrade ---->: ", params)
-    // dispatch(updateCardInfo(params))
+    // console.log("pedingList-Params-onClickAcceptTrade ---->: ", params)
+    dispatch(updateCardInfo(params))
 };
 export const onClickAcceptCompleteQuest =({
     type,
@@ -60,13 +60,13 @@ export const onClickAcceptCompleteQuest =({
 
     const params={
         CardId,
-        points: points + pendingRewardPoints,
-        pendingRewardPoints: pendingRewardPoints - itemData.points,
+        points: points + itemData.itemData.points,
+        pendingRewardPoints: pendingRewardPoints - itemData.itemData.points,
         completePending: updatePendingList,
         historyList: historyList ? [...historyList, pendingToHistory] : [pendingToHistory]
     }
-    console.log("pedingList-Params-onClickAcceptCompleteQuest ---->: ", params)
-    // dispatch(updateCardInfo(params))
+    // console.log("pedingList-Params-onClickAcceptCompleteQuest ---->: ", params)
+    dispatch(updateCardInfo(params))
 };
 export const onClickRejectTrade =({
     type,
@@ -85,12 +85,12 @@ export const onClickRejectTrade =({
 
     const params = {
         CardId: CardId,
-        points: points + itemData.points,
-        pendingTradePoints: pendingTradePoints - itemData.points,
+        points: points + itemData.itemData.points,
+        pendingTradePoints: pendingTradePoints - itemData.itemData.points,
         tradePending: updatePendingList
     }
-    console.log("pedingList-Params-onClickRejectTrade ---->: ", params)
-    // dispatch(updateCardInfo(params))
+    // console.log("pedingList-Params-onClickRejectTrade ---->: ", params)
+    dispatch(updateCardInfo(params))
 };
 export const onClickRejectComplete =({
     type,
@@ -110,14 +110,41 @@ export const onClickRejectComplete =({
     const params = {
         CardId: CardId,
         points: points,
-        pendingRewardPoints: pendingRewardPoints - itemData.points,
+        pendingRewardPoints: pendingRewardPoints - itemData.itemData.points,
         completePending: updatePendingList
     }
-    console.log("pedingList-Params-onClickRejectComplete ---->: ", params)
-    // dispatch(updateCardInfo(params))
+    // console.log("pedingList-Params-onClickRejectComplete ---->: ", params)
+    dispatch(updateCardInfo(params))
 };
 
-export const onBuyClick = ({
+export const onTradeClick = ({
+    type,
+    cardData,
+    itemData,//trade, complete
+    dispatch,
+    updateCardInfo
+}) => {
+
+    if(cardData.points - itemData.points > 0) {
+        const params = {
+            CardId: cardData.link,
+            points: cardData.points - itemData.points,
+            pendingTradePoints: cardData.pendingTradePoints + itemData.points,
+            tradePending: cardData.tradePending.concat([{
+                itemId: `trade-${uuidv4()}`,
+                status: "pending",
+                activeDate: moment().format("YYYY-MM-DD"),
+                fulFilledDate: "none",
+                itemData: itemData
+            }])
+        }
+        // console.log("onBuyClick-params--->: ", params)
+        dispatch(updateCardInfo(params))
+    }
+
+}
+
+export const onCompleteClick = ({
     type,
     cardData,
     itemData,//trade, complete
@@ -136,6 +163,45 @@ export const onBuyClick = ({
             itemData: itemData
         }])
     }
-    console.log("onBuyClick-params--->: ", params)
-    // dispatch(updateCardInfo(params))
+    // console.log("onBuyClick-params--->: ", params)
+    dispatch(updateCardInfo(params))
 }
+
+export const onCancelPendingClick =({
+    type,
+    cardData,
+    itemData,//trade, complete
+    dispatch,
+    updateCardInfo
+})=>{
+    const {
+        CardId,
+        points,
+    } = cardData;
+
+    if(type === 'tradePending'){
+        const updatePendingList = cardData[type].filter(item => item.itemId !== itemData.itemId);
+
+        const params = {
+            CardId: CardId,
+            points: points + itemData.itemData.points,
+            pendingTradePoints: cardData.pendingTradePoints - itemData.itemData.points,
+            tradePending: updatePendingList
+        }
+        // console.log("Cancel---->: ", params)
+        dispatch(updateCardInfo(params))
+    }
+    if(type === 'completePending'){
+
+        const updatePendingList = cardData[type].filter(item => item.itemId !== itemData.itemId);
+    
+        const params = {
+            CardId: CardId,
+            points: points,
+            pendingRewardPoints: cardData.pendingRewardPoints - itemData.itemData.points,
+            completePending: updatePendingList
+        }
+        // console.log("Cancel---->: ", params)
+        dispatch(updateCardInfo(params))
+    }
+};

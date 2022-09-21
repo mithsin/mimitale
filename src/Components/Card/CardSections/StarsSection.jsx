@@ -11,8 +11,8 @@ export const StarsSection = ({cardData}) => {
         <StarsSectionWrap>
             <NameBlock>{cardData.nickName}</NameBlock>
             <StarsContainer color="green" type="available" StarPoints={cardData.points}/>
-            <StarsContainer color="yellow" type="reward" StarPoints={cardData.pendingRewardPoints}/>
-            <StarsContainer color="red" type="traded" StarPoints={cardData.pendingTradePoints}/>
+            <StarsContainer color="yellow" type="pending reward" StarPoints={cardData.pendingRewardPoints}/>
+            <StarsContainer color="red" type="pending traded" StarPoints={cardData.pendingTradePoints}/>
         </StarsSectionWrap>
     );
 }

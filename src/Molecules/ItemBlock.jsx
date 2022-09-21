@@ -17,7 +17,8 @@ import { showTypeText } from "utils/type";
 import { EditItemFrom } from "Components/Forms/EditItemFrom";
 
 import {
-    onBuyClick
+    onCompleteClick,
+    onTradeClick
 } from './events';
 
 export const ItemBlock = ({
@@ -28,6 +29,7 @@ export const ItemBlock = ({
 }) => {
     const {
         image,
+        points,
         itemName,
         itemDescription
     } = itemData;
@@ -40,14 +42,24 @@ export const ItemBlock = ({
         dispatch,
         updateCardInfo
     }
-
     const onEditClick = () => {
         setIsModelOpen(true);
     }
 
     const onGetClick = () => {
-        onBuyClick(clickProps)
+        if(showTypeText[type] === "Buy"){
+            onTradeClick(clickProps)
+        }
+        if(showTypeText[type] === "Done"){
+            onCompleteClick(clickProps)
+        }
     }
+
+    const buttonAvailable = () =>( 
+        (showTypeText[type] === "Buy" && (cardData.points - itemData.points > 0)) 
+            ? false
+            : true
+    )
 
     return (
         <>
@@ -56,7 +68,7 @@ export const ItemBlock = ({
                     <Tooltip title={itemDescription}>
                         <IconAbsoulteTopRight icon={faCircleInfo}/>
                     </Tooltip>
-                    <PointsBottomRight color="green">50</PointsBottomRight>
+                    <PointsBottomRight color="green">{points}</PointsBottomRight>
                 </BackgroundImage>
                 <div className="textWrapper">
                     <span className="textTitle">{itemName}</span>
@@ -67,6 +79,7 @@ export const ItemBlock = ({
                         onClick={onEditClick}
                     />
                     : <BasicButtons 
+                        disabled={buttonAvailable()}
                         label={showTypeText[type]}
                         onClick={onGetClick}
                     />

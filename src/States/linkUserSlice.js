@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-// import {mockFullUser} from '../mockData';
+import { setCardState } from 'States/cardSlice';
 
 export const linkUserSlice = createSlice({
     name: 'linkCardState',
@@ -8,6 +8,7 @@ export const linkUserSlice = createSlice({
         giverNickName: '',
         nickName: '',
         receiverGender: '',
+        link: '',
         points: 0,
         pendingTradePoints: 0,
         pendingRewardPoints: 0,
@@ -22,33 +23,35 @@ export const linkUserSlice = createSlice({
         cardSetting: {}
     },
     reducers: {
-        setCardState: (state, action) => {
+        setLinkCardState: (state, action) => {
             return {...state, ...action.payload}
         }
     },
 });
  
 export const {
-    setCardState
+    setLinkCardState
 } = linkUserSlice.actions;
 
 const UserAPI = process.env.REACT_APP_API_GATEWAY_URL;
 
 export const getCardData = ( cardlink ) => dispatch => {
         axios.get(`${UserAPI}/card/${cardlink}`)
-        .then(res => 
-            dispatch(setCardState({...res.data}))
-        )
+        .then(res => {
+            dispatch(setLinkCardState(res.data))
+            dispatch(setCardState(res.data))
+        })
         .catch(err => console.log(err))
 }
 
 export const updateCardData = ( cardlink ) => dispatch => {
-    dispatch(setCardState({...cardlink}));
+    dispatch(setLinkCardState({...cardlink}));
 }
 
 export const cardState = state => state.linkCardState;
 export const giverNickName = state => state.linkCardState.giverNickName;
 export const nickName = state => state.linkCardState.nickName;
+export const cardLink = state => state.linkCardState.link;
 export const cardPoints = state => state.linkCardState.points;
 export const pendingTradePoints = state => state.linkCardState.pendingTradePoints;
 export const pendingRewardPoints = state => state.linkCardState.pendingRewardPoints;
