@@ -55,6 +55,12 @@ export const ItemBlock = ({
         }
     }
 
+    const buttonAvailable = () =>( 
+        (showTypeText[type] === "Buy" && (cardData.points - itemData.points > 0)) 
+            ? false
+            : true
+    )
+
     return (
         <>
             <ItemBlockWrapper>
@@ -73,6 +79,7 @@ export const ItemBlock = ({
                         onClick={onEditClick}
                     />
                     : <BasicButtons 
+                        disabled={buttonAvailable()}
                         label={showTypeText[type]}
                         onClick={onGetClick}
                     />
