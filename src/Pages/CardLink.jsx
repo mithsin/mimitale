@@ -7,7 +7,6 @@ import {
 } from './styled';
 import { cardState, getCardData } from 'States/linkUserSlice';
 
-
 const CardLink = () => {
     const dispatch = useDispatch();
     const cardUseState = useSelector(cardState);

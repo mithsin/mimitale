@@ -143,6 +143,7 @@ export const PointsBottomRight = styled.div`
     border-radius: 50%;
     padding: 3px;
     font-weight: 700;
+    min-width: 15px;
     ${props => `color: ${props.color};`}
 `;
 

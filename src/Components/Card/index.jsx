@@ -24,7 +24,7 @@ export const Card = ({userTypeGiver=true}) => {
         <CardOutterWrap>
             {openCardSetting && 
                 <CardSetting cardData={cardData} setOpenCardSetting={setOpenCardSetting}/>}
-            <ProfileImageSection cardData={cardData}  setOpenCardSetting={setOpenCardSetting}/>
+            <ProfileImageSection cardData={cardData} setOpenCardSetting={setOpenCardSetting} userTypeGiver={userTypeGiver} />
             <StarsSection cardData={cardData}/>
             <OptionsSwipe {...propsList} />
             <SelectedSectionLayout {...propsList}/>

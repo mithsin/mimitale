@@ -6,7 +6,8 @@ import {
     onClickAcceptTrade,
     onClickAcceptCompleteQuest,
     onClickRejectTrade,
-    onClickRejectComplete
+    onClickRejectComplete,
+    onCancelPendingClick
 } from './events';
 
 import {
@@ -33,7 +34,6 @@ export const RowBlock = ({
 }) => {
     const dispatch = useDispatch();
     const [isFlip, setIsFlip] = useState(false);
-    const setUseItemData = {};
 
     const clickProps = {
         type,
@@ -55,26 +55,28 @@ export const RowBlock = ({
 
     const onCancelClick = () => {
         console.log('cancel clicked')
+        onCancelPendingClick(clickProps)
     }
 
-    const FrontSide = ({useItemData}) => {
+    const FrontSide = ({itemDataObj}) => {
+
         const {
             image,
             itemDescription,
             itemName,
             points,
             itemId,
-        } = useItemData
+        } = itemDataObj
         
         const pointColor = {
             "shop": "#16bbbb",
             "quest": "#4c0303d1",
             "questItem": "#4c0303d1",
-        }
+        }     
 
         return (
             <FrontRowInnerWrap>
-                <VerticalBackgroundImage image={image}>
+                <VerticalBackgroundImage image={image || ''}>
                     <PointsBottomRight color={pointColor[itemId?.split('-')[0]] || "blue"}>{points}</PointsBottomRight>
                 </VerticalBackgroundImage>
                 <RowTextBlock>
@@ -97,12 +99,13 @@ export const RowBlock = ({
         )
     };
 
-    const BackSide = ({itemObj}) =>  {
+    const BackSide = ({itemDataObj}) =>  {
+        console.log('backside--->: ', itemDataObj)
         const { 
             activeDate,
             fulFilledDate,
             status,
-         } = itemObj;
+         } = itemDataObj;
         return (
             <BackRowInnerWrap>
                 <div>activeDate: {activeDate}</div>
@@ -115,13 +118,12 @@ export const RowBlock = ({
     const onFlipClick = () => setIsFlip(!isFlip);
     return (
         <ItemRowWrapper>
-            {   setUseItemData?.itemObj && 
-                    <IconAbsoulteTopRight top="1rem" right="1rem" icon={faRepeat} onClick={onFlipClick}/>
-            }
-            { isFlip
-                ? <BackSide itemObj={setUseItemData?.itemObj}/>
-                : <FrontSide useItemData={itemData}/>
-            }
+            <IconAbsoulteTopRight top="1rem" right="1rem" icon={faRepeat} onClick={onFlipClick}/>
+            {itemData?.status && (
+                isFlip
+                    ? <BackSide itemDataObj={itemData}/>
+                    : <FrontSide itemDataObj={itemData?.itemData}/>
+            )}
         </ItemRowWrapper>
     );
 };

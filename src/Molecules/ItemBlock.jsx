@@ -29,6 +29,7 @@ export const ItemBlock = ({
 }) => {
     const {
         image,
+        points,
         itemName,
         itemDescription
     } = itemData;
@@ -41,7 +42,6 @@ export const ItemBlock = ({
         dispatch,
         updateCardInfo
     }
-
     const onEditClick = () => {
         setIsModelOpen(true);
     }
@@ -62,7 +62,7 @@ export const ItemBlock = ({
                     <Tooltip title={itemDescription}>
                         <IconAbsoulteTopRight icon={faCircleInfo}/>
                     </Tooltip>
-                    <PointsBottomRight color="green">50</PointsBottomRight>
+                    <PointsBottomRight color="green">{points}</PointsBottomRight>
                 </BackgroundImage>
                 <div className="textWrapper">
                     <span className="textTitle">{itemName}</span>

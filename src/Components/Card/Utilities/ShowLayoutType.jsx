@@ -1,21 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { showDisplayType } from 'utils/type';
+import { useFullCardData } from 'States/cardSlice';
+import { useSelector } from 'react-redux';
 import { 
     SectionVerticalGridWrap,
     SectionGridWrap,
 } from './styled';
 import { ItemBlock, AddNewItemBlock, RowBlock, PointsLayout } from 'Molecules';
 
-export const ShowLayoutType = ({type, list, cardData, userTypeGiver}) => {
+export const ShowLayoutType = ({type, userTypeGiver}) => {
+    const [selectList, setSelectList] = useState([])
+    const cardData = useSelector(useFullCardData);
+    const selectMemo = useCallback(()=>{
+        setSelectList(cardData[type])
+    },[type, cardData])
+
+    useEffect(()=>{
+        selectMemo()
+    },[type, selectMemo]);
+
     const showType = showDisplayType(userTypeGiver)
 
     if(showType[type] === "tile"){
         return (
             <SectionGridWrap>
                 {
-                    (list?.length > 0)
+                    (selectList?.length > 0)
                         ? (<>   
-                            {list.map((item, index) => {
+                            {selectList.map((item, index) => {
                                 return(
                                     <ItemBlock 
                                         key={'itemblock-' + index}
@@ -41,8 +53,8 @@ export const ShowLayoutType = ({type, list, cardData, userTypeGiver}) => {
         return(
             <SectionVerticalGridWrap>
                 {
-                    (list?.length > 0)
-                        ? list.map((item, index) => {
+                    (selectList?.length > 0)
+                        ? selectList.map((item, index) => {
                                 return(
                                     <RowBlock
                                         key={'RowBlock-' + index}

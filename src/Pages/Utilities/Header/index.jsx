@@ -3,7 +3,7 @@ import { userLogout } from 'States/cognitoSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import useOnClickOutside from 'utils/useOnClickOutside';
-// import NewCardForm from 'Components/ItemForm/NewCardForm';
+import NewCardForm from 'Components/Forms/NewCardForm';
 import {
     isSignIn,
     userData
@@ -15,8 +15,12 @@ import {
     Toolbar,
     MenuItem
  } from '@mui/material';
+ import {
+  ProfileMenuClass,
+  HeaderFormWrap
+ } from './styled';
 
-export default function ButtonAppBar() {
+export const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loginRef = useRef(null);
@@ -30,13 +34,13 @@ export default function ButtonAppBar() {
   useOnClickOutside(loginRef, () => setOpenProfileMenu(false));
 
   const RenderMenu = (
-    <ul className={"profileMenu"} ref={ loginRef } >
+    <ProfileMenuClass ref={ loginRef } >
       <MenuItem>Profile</MenuItem>
       <MenuItem onClick={()=> setOpenAddNewCard(!openAddNewCard)}>Add new card</MenuItem>
       <MenuItem onClick={()=> setOpenProfileMenu(!openProfileMenu)}>
         <Button variant="contained" color="primary" onClick={()=> dispatch(userLogout({navigate}))}>Logout</Button>
       </MenuItem>
-    </ul>
+    </ProfileMenuClass>
   );
   return (
     userSignInState === false ? '' :
@@ -55,8 +59,10 @@ export default function ButtonAppBar() {
           }
         </Toolbar>
       </AppBar>
-      {/* { openAddNewCard && <NewCardForm setOpenNewCardForm={setOpenAddNewCard}/> } */}
+      { openAddNewCard && <HeaderFormWrap><NewCardForm setOpenNewCardForm={setOpenAddNewCard}/></HeaderFormWrap> }
       { openProfileMenu && (!openAddNewCard) && RenderMenu }
     </div>
   );
 }
+
+export default Header;
