@@ -1,5 +1,5 @@
 import React, { lazy } from 'react';
-import { Routes, Route, useParams } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import './App.css';
 
@@ -12,11 +12,9 @@ import CardLink from 'Pages/CardLink';
 const Dashboard = lazy(() => import('Pages/Dashboard'));
 
 const App = () => {
-  const {cardlink} = useParams();
-  console.log('cardlink-->: ', cardlink)
   return (
     <div className="App">
-      {!cardlink && <Header />}
+      <Header />
       <Routes>
         <Route exact path="/login" element={<Login/>} />
         <Route exact path="/signup" element={<SignUp/>} />

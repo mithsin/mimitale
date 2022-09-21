@@ -8,6 +8,7 @@ export const linkUserSlice = createSlice({
         giverNickName: '',
         nickName: '',
         receiverGender: '',
+        link: '',
         points: 0,
         pendingTradePoints: 0,
         pendingRewardPoints: 0,
@@ -49,6 +50,7 @@ export const updateCardData = ( cardlink ) => dispatch => {
 export const cardState = state => state.linkCardState;
 export const giverNickName = state => state.linkCardState.giverNickName;
 export const nickName = state => state.linkCardState.nickName;
+export const cardLink = state => state.linkCardState.link;
 export const cardPoints = state => state.linkCardState.points;
 export const pendingTradePoints = state => state.linkCardState.pendingTradePoints;
 export const pendingRewardPoints = state => state.linkCardState.pendingRewardPoints;

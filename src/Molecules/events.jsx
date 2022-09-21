@@ -117,7 +117,32 @@ export const onClickRejectComplete =({
     // dispatch(updateCardInfo(params))
 };
 
-export const onBuyClick = ({
+export const onTradeClick = ({
+    type,
+    cardData,
+    itemData,//trade, complete
+    dispatch,
+    updateCardInfo
+}) => {
+
+    const params = {
+        CardId: cardData.link,
+        points: cardData.points - itemData.points,
+        pendingRewardPoints: cardData.pendingRewardPoints + itemData.points,
+        completePending: cardData.tradePending.concat([{
+            itemId: `trade-${uuidv4()}`,
+            status: "pending",
+            activeDate: moment().format("YYYY-MM-DD"),
+            fulFilledDate: "none",
+            itemData: itemData
+        }])
+    }
+    console.log("onBuyClick-params--->: ", params)
+    // dispatch(updateCardInfo(params))
+}
+
+
+export const onCompleteClick = ({
     type,
     cardData,
     itemData,//trade, complete

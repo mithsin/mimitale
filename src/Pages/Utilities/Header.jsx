@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { userLogout } from '../../States/cognitoSlice';
+import { userLogout } from 'States/cognitoSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import useOnClickOutside from '../../utils/useOnClickOutside';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import useOnClickOutside from 'utils/useOnClickOutside';
 // import NewCardForm from 'Components/ItemForm/NewCardForm';
 import {
     isSignIn,
@@ -25,6 +25,8 @@ export default function ButtonAppBar() {
   const [openProfileMenu, setOpenProfileMenu] = useState(false);
   const [openAddNewCard, setOpenAddNewCard] = useState(false);
 
+  let isCard = useLocation().pathname.includes('card/card-');
+  
   useOnClickOutside(loginRef, () => setOpenProfileMenu(false));
 
   const RenderMenu = (
@@ -48,7 +50,9 @@ export default function ButtonAppBar() {
                   src="https://res.cloudinary.com/paf1david/image/upload/v1599395992/pafpay/oljxozj8fby4beaefipe.png" 
                   alt="mimitale"/>
           </Link>
-          <Avatar style={{backgroundColor: "#6bbbfd"}} onClick={()=>setOpenProfileMenu(!openProfileMenu)}>{userDataState?.userName.substring(0,1).toUpperCase()}</Avatar>
+          {!isCard &&
+            <Avatar style={{backgroundColor: "#6bbbfd"}} onClick={()=>setOpenProfileMenu(!openProfileMenu)}>{userDataState?.userName.substring(0,1).toUpperCase()}</Avatar>
+          }
         </Toolbar>
       </AppBar>
       {/* { openAddNewCard && <NewCardForm setOpenNewCardForm={setOpenAddNewCard}/> } */}

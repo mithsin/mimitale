@@ -17,7 +17,8 @@ import { showTypeText } from "utils/type";
 import { EditItemFrom } from "Components/Forms/EditItemFrom";
 
 import {
-    onBuyClick
+    onCompleteClick,
+    onTradeClick
 } from './events';
 
 export const ItemBlock = ({
@@ -46,7 +47,12 @@ export const ItemBlock = ({
     }
 
     const onGetClick = () => {
-        onBuyClick(clickProps)
+        if(showTypeText[type] === "Buy"){
+            onTradeClick(clickProps)
+        }
+        if(showTypeText[type] === "Done"){
+            onCompleteClick(clickProps)
+        }
     }
 
     return (
