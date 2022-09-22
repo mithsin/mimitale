@@ -56,7 +56,7 @@ export const ItemBlock = ({
     }
 
     const buttonAvailable = () =>( 
-        (showTypeText[type] === "Buy" && (cardData.points - itemData.points > 0)) 
+        ((showTypeText[type] === "Buy" && (cardData.points - itemData.points >= 0)) || showTypeText[type] !== "Buy") 
             ? false
             : true
     )

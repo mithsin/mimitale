@@ -38,6 +38,7 @@ const UserAPI = process.env.REACT_APP_API_GATEWAY_URL;
 export const getCardData = ( cardlink ) => dispatch => {
         axios.get(`${UserAPI}/card/${cardlink}`)
         .then(res => {
+            console.log('res.data--< ', res.data)
             dispatch(setLinkCardState(res.data))
             dispatch(setCardState(res.data))
         })

@@ -19,7 +19,13 @@ export const ShowLayoutType = ({type, userTypeGiver}) => {
         selectMemo()
     },[type, selectMemo]);
 
-    const showType = showDisplayType(userTypeGiver)
+    const showType = showDisplayType(type)
+    // console.log('cardData-->: ', cardData)
+    // console.log('type-->: ', type)
+    // console.log('userTypeGiver-->: ', userTypeGiver)
+    // console.log('selectList-->: ', selectList)
+    // console.log('showType-->: ', showType)
+        // console.log('selectList-->: ', selectList)
 
     if(showType[type] === "tile"){
         return (
