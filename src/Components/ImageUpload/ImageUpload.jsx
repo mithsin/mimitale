@@ -29,7 +29,7 @@ return (
         <input
             type="file"
             name="file"
-            placeholder="Upload an image"
+            placeHolder="Upload an image"
             onChange={ uploadImage } 
         />
         {

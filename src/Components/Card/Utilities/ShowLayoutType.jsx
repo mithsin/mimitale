@@ -1,6 +1,15 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { showDisplayType } from 'utils/type';
-import { useFullCardData } from 'States/cardSlice';
+import { 
+    useFullCardData, 
+    useShopItemList,
+    useCompletePending,
+    useQuestItemList,
+    useDailyQuestItemList,
+    useHistoryList,
+    useRequestItem,
+    useTradePending,
+} from 'States/cardSlice';
 import { useSelector } from 'react-redux';
 import { 
     SectionVerticalGridWrap,
@@ -13,19 +22,33 @@ export const ShowLayoutType = ({type, userTypeGiver}) => {
     const cardData = useSelector(useFullCardData);
     const selectMemo = useCallback(()=>{
         setSelectList(cardData[type])
-    },[type, cardData])
+    },[
+        type, 
+        cardData,
+        useShopItemList,
+        useCompletePending,
+        useQuestItemList,
+        useDailyQuestItemList,
+        useHistoryList,
+        useRequestItem,
+        useTradePending
+    ])
 
     useEffect(()=>{
         selectMemo()
-    },[type, selectMemo]);
+    },[
+        type, 
+        selectMemo,
+        useShopItemList,
+        useCompletePending,
+        useQuestItemList,
+        useDailyQuestItemList,
+        useHistoryList,
+        useRequestItem,
+        useTradePending
+    ]);
 
     const showType = showDisplayType(type)
-    // console.log('cardData-->: ', cardData)
-    // console.log('type-->: ', type)
-    // console.log('userTypeGiver-->: ', userTypeGiver)
-    // console.log('selectList-->: ', selectList)
-    // console.log('showType-->: ', showType)
-        // console.log('selectList-->: ', selectList)
 
     if(showType[type] === "tile"){
         return (
