@@ -82,7 +82,7 @@ export const PointsLayout = ({ cardData, className }) => {
                 className={inputError ? 'inputError' : 'pointInput'} 
                 value={inputValue} 
                 type='text' 
-                placeholder="points" 
+                placeHolder="points" 
                 onChange={onInputChange}/>
             <ButtonWrap>
                 <BasicButtons

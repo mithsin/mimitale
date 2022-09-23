@@ -10,7 +10,7 @@ import {
 } from './styled';
 import Tooltip from '@mui/material/Tooltip';
 import {
-    faCircleInfo
+    faRepeat
 } from '@fortawesome/free-solid-svg-icons';
 
 import { showTypeText } from "utils/type";
@@ -35,6 +35,7 @@ export const ItemBlock = ({
     } = itemData;
     const dispatch = useDispatch();
     const [isModelOpen, setIsModelOpen] = useState(false)
+    const [isFlip, setIsFlip] = useState(false);
     const clickProps = {
         type,
         cardData,
@@ -60,39 +61,57 @@ export const ItemBlock = ({
             ? false
             : true
     )
+    const onFlipClick = () => setIsFlip(!isFlip);
+
+    const FrontSide = () => (
+        <ItemBlockWrapper>
+            <BackgroundImage image={image}>
+
+                <IconAbsoulteTopRight top=".25rem" right=".25rem" icon={faRepeat} onClick={onFlipClick}/>
+        
+                <PointsBottomRight color="green">{points}</PointsBottomRight>
+            </BackgroundImage>
+            <div className="textWrapper">
+                <span className="textTitle">{itemName}</span>
+            </div>
+            {userTypeGiver 
+                ? <BasicButtons 
+                    label="EDIT"
+                    onClick={onEditClick}
+                />
+                : <BasicButtons 
+                    disabled={buttonAvailable()}
+                    label={showTypeText[type]}
+                    onClick={onGetClick}
+                />
+            }
+            {isModelOpen && 
+                <EditItemFrom 
+                    setIsModelOpen={setIsModelOpen}
+                    type={type}
+                    itemData={itemData}
+                    cardData={cardData}
+                />
+            }
+        </ItemBlockWrapper>
+    );
+
+    const BackSide = () =>  (
+        <ItemBlockWrapper>
+            <IconAbsoulteTopRight top=".25rem" right=".25rem" icon={faRepeat} onClick={onFlipClick}/>
+                
+            <div className="textWrapper">
+                <span className="textTitle">{itemDescription}</span>
+            </div>
+        </ItemBlockWrapper>
+    )
 
     return (
         <>
-            <ItemBlockWrapper>
-                <BackgroundImage image={image}>
-                    <Tooltip title={itemDescription}>
-                        <IconAbsoulteTopRight icon={faCircleInfo}/>
-                    </Tooltip>
-                    <PointsBottomRight color="green">{points}</PointsBottomRight>
-                </BackgroundImage>
-                <div className="textWrapper">
-                    <span className="textTitle">{itemName}</span>
-                </div>
-                {userTypeGiver 
-                    ? <BasicButtons 
-                        label="EDIT"
-                        onClick={onEditClick}
-                    />
-                    : <BasicButtons 
-                        disabled={buttonAvailable()}
-                        label={showTypeText[type]}
-                        onClick={onGetClick}
-                    />
-                }
-                {isModelOpen && 
-                    <EditItemFrom 
-                        setIsModelOpen={setIsModelOpen}
-                        type={type}
-                        itemData={itemData}
-                        cardData={cardData}
-                    />
-                }
-            </ItemBlockWrapper>
+            { isFlip
+                ? <BackSide />
+                : <FrontSide />
+            }
         </>
     );
 };
