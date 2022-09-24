@@ -20,32 +20,43 @@ import { ItemBlock, AddNewItemBlock, RowBlock, PointsLayout } from 'Molecules';
 export const ShowLayoutType = ({type, userTypeGiver}) => {
     const [selectList, setSelectList] = useState([])
     const cardData = useSelector(useFullCardData);
+
+    const isShopItemList = useSelector(useShopItemList);
+    const isCompletePending = useSelector(useCompletePending);
+    const isQuestItemList = useSelector(useQuestItemList);
+    const isDailyQuestItemList = useSelector(useDailyQuestItemList);
+    const isHistoryList = useSelector(useHistoryList);
+    const isRequestItem = useSelector(useRequestItem);
+    const isTradePending = useSelector(useTradePending);
+
     const selectMemo = useCallback(()=>{
         setSelectList(cardData[type])
+        // eslint-disable-next-line
     },[
         type, 
         cardData,
-        useShopItemList,
-        useCompletePending,
-        useQuestItemList,
-        useDailyQuestItemList,
-        useHistoryList,
-        useRequestItem,
-        useTradePending
+        isShopItemList,
+        isCompletePending,
+        isQuestItemList,
+        isDailyQuestItemList,
+        isHistoryList,
+        isRequestItem,
+        isTradePending
     ])
 
     useEffect(()=>{
         selectMemo()
+        // eslint-disable-next-line
     },[
         type, 
         selectMemo,
-        useShopItemList,
-        useCompletePending,
-        useQuestItemList,
-        useDailyQuestItemList,
-        useHistoryList,
-        useRequestItem,
-        useTradePending
+        isShopItemList,
+        isCompletePending,
+        isQuestItemList,
+        isDailyQuestItemList,
+        isHistoryList,
+        isRequestItem,
+        isTradePending
     ]);
 
     const showType = showDisplayType(type)
