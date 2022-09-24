@@ -8,7 +8,6 @@ import {
     IconAbsoulteTopRight,
     PointsBottomRight
 } from './styled';
-import Tooltip from '@mui/material/Tooltip';
 import {
     faRepeat
 } from '@fortawesome/free-solid-svg-icons';
